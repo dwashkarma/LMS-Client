@@ -1,16 +1,14 @@
 import type { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import UserSchema from "@/modals/User";
 import { connectDB } from "./mongodb";
+import User from "@/modals/User";
+import bcrypt from "bcryptjs";
 
-interface ExtendedProfile {
-  picture?: string;
-  email?: string;
-  name?: string;
-  sub?: string;
-}
 export const authOptions: NextAuthOptions = {
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID as string,
@@ -18,20 +16,45 @@ export const authOptions: NextAuthOptions = {
     }),
     CredentialsProvider({
       id: "credentials",
-      name: "Credentials",
+      name: "credentials",
       credentials: {
         email: {},
         password: {},
-        fullname: {},
       },
       async authorize(credentials, req) {
-        return null;
+        //connect to the database first
+        await connectDB();
+
+        //find the user with email id
+        const userExists = await User.findOne({
+          email: credentials?.email,
+        }).select("+password");
+
+        if (!userExists) {
+          throw new Error("Invalid email!");
+        }
+        //.select("+password") is neccessary to get password from database and to compare it.......
+
+        //match the hashed password with bcrypt compare
+        const passwordMatch = await bcrypt.compare(
+          credentials!.password,
+          userExists.password
+        );
+
+        if (!passwordMatch) {
+          throw new Error("Invalid Password !");
+        }
+        return {
+          id: userExists._id.toString(),
+          name: userExists.name,
+          email: userExists.email,
+        };
       },
     }),
   ],
-  pages: {
-    signIn: "/",
-  },
+  // pages: {
+  //   signIn: "/",
+  // },
   // callbacks: {
   //   async session({ session, token }) {
   //     return session;
