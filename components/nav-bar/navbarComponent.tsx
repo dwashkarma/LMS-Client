@@ -18,8 +18,15 @@ const NavBarComponent: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-between items-center gap-4 p-4 px-8  shadow ">
-      <div className="font-semibold text-primary text-2xl">LMS</div>
+    <div className="flex justify-between items-center gap-4 p-4 px-8 h-[10dvh] shadow border-b border-primary  border-opacity-15 ">
+      <div className="flex items-center gap-16">
+        <div className="font-semibold flex items-center gap-4 text-primary text-2xl">
+          <Image src={"/logo.svg"} alt="logo" height={30} width={30} />
+          <span className="text-base">Learn Online</span>
+        </div>
+        <div>Categories</div>
+      </div>
+      <div>Search</div>
       <button onClick={handleClick}>
         <div className="flex gap-2 items-center text-sm font-normal">
           {session?.user?.image ? (

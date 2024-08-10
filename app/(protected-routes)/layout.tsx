@@ -1,4 +1,5 @@
-import NavBarComponent from "@/components/navbarComponent";
+import NavBarComponent from "@/components/nav-bar/navbarComponent";
+import SideBarComponent from "@/components/side-bar";
 
 export default function RootLayout({
   children,
@@ -6,9 +7,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
+    <div >
       <NavBarComponent />
-      {children}
+      <div className="flex">
+        <SideBarComponent />
+        {children}
+      </div>
     </div>
   );
 }
