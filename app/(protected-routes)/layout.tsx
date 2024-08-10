@@ -1,27 +1,18 @@
-"use client";
-import { signIn, useSession } from "next-auth/react";
+import NavBarComponent from "@/components/nav-bar/navbarComponent";
+import SideBarComponent from "@/components/side-bar";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { status } = useSession();
-  if (status === "authenticated") {
-    return <div>{children}</div>;
-  } else if (status === "loading") {
-    return <div>Loading.......</div>;
-  } else {
-    return (
-      <div className="grid place-content-center place-items-center h-screen">
-        {" "}
-        <button
-          className="text-slate-50 bg-cyan-600 p-2 rounded-md hover:bg-cyan-800 hover:shadow"
-          onClick={() => signIn("google")}
-        >
-          Sign In
-        </button>
+  return (
+    <div >
+      <NavBarComponent />
+      <div className="flex">
+        <SideBarComponent />
+        {children}
       </div>
-    );
-  }
+    </div>
+  );
 }

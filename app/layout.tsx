@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
-import Provider from "@/providers/SessionProvider";
+import ThemeProviders from "@/providers/ThemeProviders";
+import SessionProviders from "@/providers/SessionProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 export const metadata: Metadata = {
   title: "LMS",
@@ -17,8 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Provider>{children}</Provider>
+      <body className={poppins.className}>
+        <ThemeProviders>
+          <SessionProviders>{children}</SessionProviders>
+        </ThemeProviders>
       </body>
     </html>
   );
