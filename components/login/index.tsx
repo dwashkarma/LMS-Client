@@ -9,6 +9,8 @@ import { redirect, useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Google } from "@mui/icons-material";
+import { CircularProgress } from "@mui/material";
 
 const loginValues = {
   email: "",
@@ -22,7 +24,7 @@ const loginSchema = yup.object().shape({
 const LoginPage = () => {
   const [passwordType, setPasswordType] = useState(false);
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const { values, handleBlur, handleChange, touched, errors, handleSubmit } =
     useFormik({
       initialValues: loginValues,
@@ -59,6 +61,13 @@ const LoginPage = () => {
   const handleClickPassword = () => {
     setPasswordType(!passwordType);
   };
+  if (status === "loading") {
+    return (
+      <div>
+        <CircularProgress color="inherit" />
+      </div>
+    );
+  }
   if (session) {
     redirect("/dashboard");
   }
@@ -94,11 +103,24 @@ const LoginPage = () => {
         <div>
           <span
             onClick={() => router.push("/register")}
-            className="text-end text-sky-800 hover:border-b cursor-pointer hover:border-b-sky-800 text-xs font-normal"
+            className="text-end  hover:border-b cursor-pointer hover:border-b-light text-xs font-normal"
           >
             Create an account
           </span>
         </div>
+      </div>
+
+      {/* <button
+          className="w-full border shadow p-3 rounded"
+          onClick={() => signIn("google")}
+        > */}
+      <div
+        className="g-signin2"
+        data-width="300"
+        data-height="200"
+        data-longtitle="true"
+      >
+        {/* </button> */}
       </div>
       <ToastContainer />
     </div>
