@@ -16,6 +16,7 @@ const SideBarComponent = () => {
         {links.map((item) => {
           return (
             <button
+              key={item.label}
               className="text-start hover:bg-light hover:shadow p-2 rounded-md hover:text-slate-100"
               onClick={() => handleLink(item.href)}
             >
