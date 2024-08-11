@@ -26,7 +26,9 @@ const NavBarComponent: React.FC = () => {
         </div>
         <div>Categories</div>
       </div>
-      <div>Search</div>
+      <div>
+        <input type="text" placeholder="Search" className="p-3 border border-primary rounded-md hover:border-primary focus:border-primary" />
+      </div>
       <button onClick={handleClick}>
         <div className="flex gap-2 items-center text-sm font-normal">
           {session?.user?.image ? (
