@@ -19,6 +19,12 @@ const config: Config = {
         dark: "#122620",
         light: "#d6ad60",
       },
+      screens:{
+        'custom-lg':'1040px',
+        'custom-md': ' 701px',
+        'custom-sm':' 700px'
+        
+      },
       fontFamily:{
         
       }
