@@ -15,7 +15,7 @@ const SideBarComponent = () => {
       <div className="flex  flex-col gap-2">
         {links.map((item) => {
           return (
-            <button
+            <button key = {item.href}
               className="text-start hover:bg-light hover:shadow p-2 rounded-md hover:text-slate-100"
               onClick={() => handleLink(item.href)}
             >

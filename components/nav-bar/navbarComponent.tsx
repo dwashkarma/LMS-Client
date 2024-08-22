@@ -5,7 +5,6 @@ import React, { MouseEvent, useState, useCallback } from "react";
 import { signOut } from "next-auth/react";
 import { Avatar, Menu, MenuItem, Drawer, List, ListItem, ListItemText, TextField, IconButton, Button, Popover } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { styled, alpha } from "@mui/material/styles";
 import SearchComponent from "../search";
@@ -89,9 +88,9 @@ const NavBarComponent: React.FC = () => {
     setCategoriesAnchorEl(event.currentTarget);
   };
 
-  const handleCategoriesMouseLeave = () => {
-    setCategoriesAnchorEl(null);
-  };
+  // const handleCategoriesMouseLeave = () => {
+  //   setCategoriesAnchorEl(null);
+  // };
 
   const handleCategoriesMenuClose = () => {
     setCategoriesAnchorEl(null);
@@ -127,7 +126,7 @@ const NavBarComponent: React.FC = () => {
               aria-expanded={categoriesOpen ? "true" : undefined}
               aria-haspopup="true"
               onMouseEnter={handleCategoriesMouseEnter}
-              onMouseLeave={handleCategoriesMouseLeave}
+              // onMouseLeave={handleCategoriesMouseLeave}
               color="inherit"
             >
               Categories
