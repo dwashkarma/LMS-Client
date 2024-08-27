@@ -1,21 +1,23 @@
 "use client";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import React, { MouseEvent, useState, useCallback } from "react";
+import React, { MouseEvent, useState } from "react";
 import { signOut } from "next-auth/react";
 import { Avatar, Menu, MenuItem, Drawer, List, ListItem, ListItemText, TextField, IconButton, Button, Popover } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { styled, alpha } from "@mui/material/styles";
 import SearchComponent from "../search";
+import CloseIcon from '@mui/icons-material/Close';
+
 
 // Options for the categories dropdown
 const options = [
   "None",
-  "Atria",
-  "Callisto",
-  "Dione",
-  "Ganymede",
+  "IELS",
+  "FrontEnd",
+  "BackEnd",
+  "Software",
   "Hangouts Call",
   "Luna",
   "Oberon",
@@ -27,14 +29,13 @@ const options = [
   "Umbriel",
 ];
 
-const ITEM_HEIGHT = 48;
 
 // Styled components for search
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
+  "&:active": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
   marginRight: theme.spacing(2),
@@ -50,11 +51,11 @@ const StyledInputBase = styled(TextField)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    paddingLeft: `calc(1em -4px ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("lg")]: {
-      width: "55ch",
+      width: "54ch",
     },
   },
 }));
@@ -68,6 +69,7 @@ const NavBarComponent: React.FC = () => {
   const menuOpen = Boolean(anchorEl);
   const categoriesOpen = Boolean(categoriesAnchorEl);
 
+  /*open menu icon for responsive*/
   const handleProfileMenuClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -76,25 +78,22 @@ const NavBarComponent: React.FC = () => {
     setAnchorEl(null);
   };
 
+/*for the drawer open and close*/
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
   };
-
   const handleDrawerClose = () => {
     setDrawerOpen(false);
-  };
+  }
 
+  /* for the categories option open section  */
   const handleCategoriesMouseEnter = (event: MouseEvent<HTMLButtonElement>) => {
     setCategoriesAnchorEl(event.currentTarget);
   };
-
-  // const handleCategoriesMouseLeave = () => {
-  //   setCategoriesAnchorEl(null);
-  // };
-
   const handleCategoriesMenuClose = () => {
     setCategoriesAnchorEl(null);
   };
+
 
   return (
     <>
@@ -118,7 +117,7 @@ const NavBarComponent: React.FC = () => {
           </div>
 
           {/* Categories Button with Popover */}
-          <div>
+          <div className="text-dark">
             <Button
               aria-label="categories"
               id="categories-button"
@@ -126,7 +125,6 @@ const NavBarComponent: React.FC = () => {
               aria-expanded={categoriesOpen ? "true" : undefined}
               aria-haspopup="true"
               onMouseEnter={handleCategoriesMouseEnter}
-              // onMouseLeave={handleCategoriesMouseLeave}
               color="inherit"
             >
               Categories
@@ -214,9 +212,10 @@ const NavBarComponent: React.FC = () => {
         <div
           style={{ width: 250, display: 'flex', flexDirection: 'column'}}
           role="presentation"
-          onClick={handleDrawerClose}
-          onKeyDown={handleDrawerClose}
+          // onClick={handleDrawerClose}
+          // onKeyDown={handleDrawerClose}
         >
+
           <List>
             {/* Logo and Title Section */}
             <ListItem>
@@ -225,10 +224,14 @@ const NavBarComponent: React.FC = () => {
                 <span className="text-base">Learn Online</span>
               </div>
             </ListItem>
+            <CloseIcon className="absolute top-0 right-0 m-2 cursor-pointer" 
+             onClick={handleDrawerClose}
+            />
+
 
             {/* Search Bar Section */}
             <ListItem>
-              <Search sx={{ width: 'auto' }}>
+              <Search sx={{ width: 'auto'}}>
                 <StyledInputBase
                   type="text"
                   name="search"
@@ -240,13 +243,13 @@ const NavBarComponent: React.FC = () => {
 
             {/* Categories Button Section */}
             <ListItem>
-              <Button onClick={handleCategoriesMouseEnter} onMouseLeave={handleCategoriesMenuClose}>
+              <Button className="text-dark" onClick={handleCategoriesMouseEnter} onMouseLeave={handleCategoriesMenuClose}>
                 Categories
               </Button>
               <Popover
                 anchorEl={categoriesAnchorEl}
                 open={categoriesOpen}
-                onClose={handleCategoriesMenuClose}
+                onMouseLeave={handleCategoriesMenuClose}
                 anchorOrigin={{
                   vertical: 'bottom',
                   horizontal: 'left',
