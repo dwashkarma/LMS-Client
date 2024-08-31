@@ -1,5 +1,6 @@
 import NavBarComponent from "@/components/nav-bar/navbarComponent";
 import SideBarComponent from "@/components/side-bar";
+import { ContextProviders } from "@/providers/ContextProviders";
 
 export default function RootLayout({
   children,
@@ -8,11 +9,13 @@ export default function RootLayout({
 }>) {
   return (
     <div>
-      <NavBarComponent />
-      <div className="lg:flex">
-        <SideBarComponent />
-        {children}
-      </div>
+      <ContextProviders>
+        <NavBarComponent />
+        <div className="lg:flex">
+          <SideBarComponent />
+          {children}
+        </div>
+      </ContextProviders>
     </div>
   );
 }
