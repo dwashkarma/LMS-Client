@@ -25,6 +25,7 @@ const SideBarComponent = () => {
           );
         })}
       </div>
+
       <div>footer</div>
     </div>
   );

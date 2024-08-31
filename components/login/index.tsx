@@ -7,10 +7,8 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { redirect, useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { Google } from "@mui/icons-material";
 import { CircularProgress } from "@mui/material";
+import toast from "react-hot-toast";
 
 const loginValues = {
   email: "",
@@ -38,25 +36,14 @@ const LoginPage = () => {
           });
 
           if (response?.error) {
-            showToastMessage(response?.error, "error");
+            toast.error(response?.error);
+            // showToastMessage(response?.error, "error");
           }
         } catch (error) {
           console.log(error);
         }
       },
     });
-
-  const showToastMessage = (message: string, type: string) => {
-    if (type === "success") {
-      toast.success(message, {
-        position: "bottom-right",
-      });
-    } else if (type === "error") {
-      toast.error(message, {
-        position: "bottom-right",
-      });
-    }
-  };
 
   const handleClickPassword = () => {
     setPasswordType(!passwordType);
@@ -95,6 +82,11 @@ const LoginPage = () => {
         handleClickPassword={handleClickPassword}
         handleChange={handleChange}
         handleBlur={handleBlur}
+        onKeyDownCapture={(e) => {
+          if (e.key === "Enter") {
+            handleSubmit();
+          }
+        }}
         helperText={touched.password ? errors.password : ""}
         errors={touched.password && Boolean(errors.password)}
       />
@@ -122,7 +114,6 @@ const LoginPage = () => {
       >
         {/* </button> */}
       </div>
-      <ToastContainer />
     </div>
   );
 };

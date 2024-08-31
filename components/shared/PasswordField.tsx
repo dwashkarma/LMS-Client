@@ -2,7 +2,7 @@ import { IconButton, InputAdornment } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { ChangeEvent } from "react";
+import { ChangeEvent, KeyboardEventHandler } from "react";
 interface InputTypes {
   name: string;
   label: string;
@@ -15,6 +15,7 @@ interface InputTypes {
   ) => void;
   handleBlur?: any;
   handleClickPassword?: any;
+  onKeyDownCapture?: KeyboardEventHandler<HTMLDivElement> | undefined;
 }
 const PasswordField: React.FC<InputTypes> = ({
   name,
@@ -26,6 +27,7 @@ const PasswordField: React.FC<InputTypes> = ({
   handleChange,
   handleBlur,
   handleClickPassword,
+  onKeyDownCapture,
 }) => {
   return (
     <TextField
@@ -37,6 +39,7 @@ const PasswordField: React.FC<InputTypes> = ({
       variant="outlined"
       onBlur={handleBlur}
       onChange={handleChange}
+      onKeyDownCapture={onKeyDownCapture}
       helperText={helperText}
       error={errors}
       InputProps={{
