@@ -11,7 +11,7 @@ function CarouselCard({
   content: { id: number; title: string; description: string }[];
 }) {
   return (
-    <div className="w-[100%] min-h-[10vh]">
+    <div className="lg:w-full min-h-[10vh]">
       <Swiper
         slidesPerView={1}
         // spaceBetween={30}
@@ -26,7 +26,7 @@ function CarouselCard({
         }}
         // navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className="lg:max-w-[80vw] max-w-[95vw] place-items-center items-center grid rounded-lg"
+        className="lg:max-w-[80vw] max-w-[90vw] place-items-center items-center grid rounded-lg"
       >
         {content.map((content) => {
           return (

@@ -9,7 +9,7 @@ export default function RootLayout({
   return (
     <div>
       <NavBarComponent />
-      <div className="flex">
+      <div className="lg:flex">
         <SideBarComponent />
         {children}
       </div>
