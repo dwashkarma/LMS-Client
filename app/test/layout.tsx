@@ -1,6 +1,5 @@
 function layout({ children }: { children: React.ReactNode }) {
-  return <div>hellokacabkcmh{children}
-  footer</div>;
+  return <>{children}</>;
 }
 
 export default layout;
