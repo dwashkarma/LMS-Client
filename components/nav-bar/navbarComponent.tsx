@@ -18,16 +18,20 @@ const NavBarComponent: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-between items-center gap-4 p-4 px-8 h-[10dvh] shadow border-b border-primary  border-opacity-15 ">
+    <div className="flex justify-between items-center gap-4 p-4 px-8 h-[10dvh]  shadow border-b border-primary  border-opacity-15 ">
       <div className="flex items-center gap-16">
         <div className="font-semibold flex items-center gap-4 text-primary text-2xl">
           <Image src={"/logo.svg"} alt="logo" height={30} width={30} />
           <span className="text-base">Learn Online</span>
         </div>
-        <div>Categories</div>
+        <div className="hidden md:block">Categories</div>
       </div>
-      <div>
-        <input type="text" placeholder="Search" className="p-3 border border-primary rounded-md hover:border-primary focus:border-primary" />
+      <div className="hidden md:block">
+        <input
+          type="text"
+          placeholder="Search"
+          className="p-3 border border-primary rounded-md hover:border-primary focus:border-primary"
+        />
       </div>
       <button onClick={handleClick}>
         <div className="flex gap-2 items-center text-sm font-normal">
@@ -42,7 +46,7 @@ const NavBarComponent: React.FC = () => {
           ) : (
             <Avatar alt="profile">{session?.user?.name?.charAt(0)}</Avatar>
           )}
-          <h2>{session?.user?.email}</h2>
+          <h2 className="hidden md:block">{session?.user?.email}</h2>
           <ArrowDropDownIcon />
         </div>
       </button>

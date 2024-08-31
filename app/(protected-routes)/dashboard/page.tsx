@@ -1,3 +1,4 @@
+import CardComponent from "@/components/card";
 import CarouselCard from "@/components/shared/CarouselCard";
 const content = [
   { id: 1, title: "Why us?", description: "loremlorem" },
@@ -7,6 +8,7 @@ export default function Home() {
   return (
     <div className="p-6 ">
       <CarouselCard content={content} />
+      <CardComponent />
     </div>
   );
 }

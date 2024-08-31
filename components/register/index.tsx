@@ -8,8 +8,7 @@ import * as yup from "yup";
 import axios from "axios";
 import { NextResponse } from "next/server";
 import { useRouter } from "next/navigation";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast from "react-hot-toast";
 
 const loginValues = {
   email: "",
@@ -30,18 +29,6 @@ const RegisterComponent = () => {
     confirm: false,
   });
   const router = useRouter();
-
-  const showToastMessage = (message: string, type: string) => {
-    if (type === "success") {
-      toast.success(message, {
-        position: "bottom-right",
-      });
-    } else if (type === "error") {
-      toast.error(message, {
-        position: "bottom-right",
-      });
-    }
-  };
 
   const {
     values,
@@ -64,13 +51,13 @@ const RegisterComponent = () => {
             password: values.password,
           });
           resetForm();
-          showToastMessage("Successfull created !", "success");
+          toast.success("Successfull created !");
         } else {
           setFieldError("confirm", "Must be same as password");
         }
       } catch (errors: any) {
         const error = errors?.response?.data.message || errors.response.data;
-        showToastMessage(error, "error");
+        toast.error(error);
 
         return NextResponse.json({ message: errors.message }, { status: 500 });
       }
@@ -81,7 +68,7 @@ const RegisterComponent = () => {
   };
 
   return (
-    <div className="shadow border w-[30%] shadow-slate-200 rounded-lg p-8  grid gap-8">
+    <div className="shadow border lg:w-[30%] shadow-slate-200 rounded-lg p-8  grid gap-8">
       <h2 className="text-center font-normal text-xl uppercase text-primary">
         Register Page
       </h2>
@@ -113,6 +100,11 @@ const RegisterComponent = () => {
         handleClickPassword={(e: any) => handleClickPassword("password")}
         handleChange={handleChange}
         handleBlur={handleBlur}
+        onKeyDownCapture={(e) => {
+          if (e.key === "Enter") {
+            handleSubmit();
+          }
+        }}
         helperText={touched.password ? errors.password : ""}
         errors={touched.password && Boolean(errors.password)}
       />
@@ -124,6 +116,11 @@ const RegisterComponent = () => {
         handleClickPassword={() => handleClickPassword("confirm")}
         handleChange={handleChange}
         handleBlur={handleBlur}
+        onKeyDownCapture={(e) => {
+          if (e.key === "Enter") {
+            handleSubmit();
+          }
+        }}
         helperText={touched.confirm ? errors.confirm : ""}
         errors={touched.confirm && Boolean(errors.confirm)}
       />
@@ -138,7 +135,6 @@ const RegisterComponent = () => {
           </span>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 };
