@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { InputBase, IconButton, Paper, MenuItem } from "@mui/material";
+import {
+  InputBase,
+  IconButton,
+  Paper,
+  MenuItem,
+  MenuList,
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { data } from "../jsonData/Data"; // Assuming your data is coming from here
 import InputField from "../shared/InputField";
@@ -21,8 +27,8 @@ const SearchBar = () => {
   );
 
   return (
-    <div className="relative">
-      <div>
+    <>
+      <div className="relative ">
         <InputField
           type="text"
           placeholder="Search for anything..."
@@ -31,19 +37,15 @@ const SearchBar = () => {
           onKeyDown={() => handleSearch()}
           name="search"
           showAndornment={<SearchIcon />}
-        ></InputField>
-      </div>
-      {/* Dropdown to show filtered results */}
-      {search && filteredData.length > 0 && (
+        />
+        {/* Dropdown to show filtered results */}
+
         <div
           style={{
             position: "absolute",
             top: "100%",
-            left: 0,
-            zIndex: 10,
+            width: "100%",
             backgroundColor: "white",
-            width: "70%",
-            // border: '1px solid #ccc',
             borderRadius: "4px",
           }}
         >
@@ -51,8 +53,8 @@ const SearchBar = () => {
             <MenuItem key={item.id}>{item.first_name}</MenuItem>
           ))}
         </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 };
 
