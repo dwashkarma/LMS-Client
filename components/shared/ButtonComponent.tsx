@@ -21,6 +21,8 @@ const ButtonComponent: React.FC<ButtonPropTypes> = ({
       onClick={handleClick}
       onKeyDown={() => handleKeyDown}
       variant="contained"
+      color="primary"
+      className="text-white"
     >
       {children}
     </Button>

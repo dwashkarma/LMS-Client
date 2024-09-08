@@ -95,7 +95,7 @@ const LoginPage = () => {
         <div>
           <span
             onClick={() => router.push("/register")}
-            className="text-end  hover:border-b cursor-pointer hover:border-b-light text-xs font-normal"
+            className="text-end  hover:border-b cursor-pointer hover:border-b-foreground text-xs font-normal"
           >
             Create an account
           </span>

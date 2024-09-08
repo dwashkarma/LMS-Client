@@ -129,7 +129,7 @@ const RegisterComponent = () => {
         <div>
           <span
             onClick={() => router.push("/")}
-            className="text-end  hover:border-b cursor-pointer hover:border-b-light text-xs font-normal"
+            className="text-end  hover:border-b cursor-pointer hover:border-b-foreground text-xs font-normal"
           >
             Already have an account
           </span>
