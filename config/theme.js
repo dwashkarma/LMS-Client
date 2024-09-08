@@ -24,24 +24,25 @@ export const theme = createTheme({
     MuiTextField: {
       styleOverrides: {
         root: {
-          "--TextField-brandBorderHoverColor": "hsl(var(--primary))",
-          "--TextField-brandBorderFocusedColor": "hsl(var(--primary))",
+          borderRadius: "10px",
         },
-        borderRadius: "10px",
       },
     },
     MuiOutlinedInput: {
       styleOverrides: {
-        borderRadius: "10px",
         notchedOutline: {
           borderRadius: "10px",
+          backgroundColor: "hsl(var(--dark))",
+
+          borderColor: "hsl(var(--light))",
         },
+
         root: {
           [`&:hover .${outlinedInputClasses.notchedOutline}`]: {
-            borderColor: "var(--TextField-brandBorderHoverColor)",
+            borderColor: "hsl(var(--dark))",
           },
           [`&.Mui-focused .${outlinedInputClasses.notchedOutline}`]: {
-            borderColor: "var(--TextField-brandBorderHoverColor)",
+            borderColor: "hsl(var(--borders))",
             borderRadius: "10px",
           },
         },
