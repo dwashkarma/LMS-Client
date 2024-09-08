@@ -1,5 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 import tailwindConfig from "@/tailwind.config";
+import { outlinedInputClasses } from "@mui/material";
 
 const {
   theme: {
@@ -17,5 +18,30 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: "inherit",
+  },
+  components: {
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          "--TextField-brandBorderHoverColor": colors["primary"],
+          "--TextField-brandBorderFocusedColor": colors["primary"],
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        notchedOutline: {
+          borderRadius: "10px",
+        },
+        root: {
+          [`&:hover .${outlinedInputClasses.notchedOutline}`]: {
+            borderColor: "var(--TextField-brandBorderHoverColor)",
+          },
+          [`&.Mui-focused .${outlinedInputClasses.notchedOutline}`]: {
+            borderColor: "var(--TextField-brandBorderHoverColor)",
+          },
+        },
+      },
+    },
   },
 });

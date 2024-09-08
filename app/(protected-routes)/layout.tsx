@@ -66,7 +66,7 @@ export default function RootLayout({
         handleDrawerToggle={handleDrawerToggle}
       />
       <div className="lg:flex">
-        <SideBarComponent />
+        {/* <SideBarComponent /> */}
         {/* Drawer Menu for Mobile */}
         <DrawerComponent
           categoriesAnchorEl={categoriesAnchorEl}

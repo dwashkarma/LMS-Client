@@ -47,17 +47,15 @@ const NavBarComponent: React.FC<NavbarProps> = ({
       {/* Main Navbar */}
       <div className="flex justify-between items-center p-4 text-md text-slate-600 shadow-lg relative">
         {/* Menu Icon for Mobile */}
-        <IconButton
-          className="block lg:hidden"
-          color="inherit"
-          aria-label="menu"
-          onClick={handleDrawerToggle}
-        >
-          <MenuIcon />
-        </IconButton>
-
-        {/* Logo and Title */}
-        <div className="flex items-center gap-16">
+        <div className="flex gap-2 items-center">
+          <IconButton
+            className="block "
+            color="inherit"
+            aria-label="menu"
+            onClick={handleDrawerToggle}
+          >
+            <MenuIcon />
+          </IconButton>
           <div className="font-semibold flex items-center gap-4 text-primary text-2xl">
             <Image
               className="block"
@@ -68,7 +66,10 @@ const NavBarComponent: React.FC<NavbarProps> = ({
             />
             <span className="text-base">Learn Online</span>
           </div>
+        </div>
 
+        {/* Logo and Title */}
+        <div className="flex items-center gap-16">
           {/* Categories Button with Popover */}
           <div className="text-dark hidden md:block">
             <Button
@@ -80,7 +81,7 @@ const NavBarComponent: React.FC<NavbarProps> = ({
               onMouseEnter={handleCategoriesMouseEnter}
               color="inherit"
             >
-              Categories
+              <p className="text-base font-normal capitalize">Categories</p>
               <ArrowDropDownIcon />
             </Button>
             <Popover
@@ -113,7 +114,7 @@ const NavBarComponent: React.FC<NavbarProps> = ({
         <div className="hidden lg:block">
           <SearchComponent />
         </div>
-
+        <div>Explore</div>
         {/* Profile Button */}
         <button
           className="flex gap-2 items-center text-sm font-normal"

@@ -1,5 +1,6 @@
 import {
   Button,
+  Divider,
   Drawer,
   List,
   ListItem,
@@ -37,62 +38,24 @@ const DrawerComponent: React.FC<DrawerProps> = ({
         // onClick={handleDrawerClose}
         // onKeyDown={handleDrawerClose}
       >
+        {/* Logo and Title Section */}
+
+        <div className="font-semibold flex items-center justify-between w-full gap-4 p-6 text-primary text-2xl">
+          <div className="flex items-center gap-4">
+            {" "}
+            <Image src="/logo.svg" alt="logo" height={30} width={30} />
+            <span className="text-base">Learn Online</span>
+          </div>
+          <button>
+            <CloseIcon onClick={handleDrawerClose} />
+          </button>
+        </div>
+        <Divider />
         <List>
-          {/* Logo and Title Section */}
-          <ListItem>
-            <div className="font-semibold flex items-center gap-4 text-primary text-2xl">
-              <Image
-                className="sm:block lg:block"
-                src="/logo.svg"
-                alt="logo"
-                height={30}
-                width={30}
-              />
-              <span className="text-base">Learn Online</span>
-            </div>
-          </ListItem>
-          <CloseIcon
-            className="absolute top-0 right-0 m-2 cursor-pointer"
-            onClick={handleDrawerClose}
-          />
+          <ListItem>Search</ListItem>
 
-          {/* Search Bar Section */}
-          <ListItem>
-            <SearchComponent />
-          </ListItem>
-
-          {/* Categories Button Section */}
-          <ListItem>
-            <Button
-              className="text-dark"
-              onClick={handleCategoriesMouseEnter}
-              onMouseLeave={handleCategoriesMenuClose}
-            >
-              Categories
-            </Button>
-            <Popover
-              anchorEl={categoriesAnchorEl}
-              open={categoriesOpen}
-              onMouseLeave={handleCategoriesMenuClose}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              transformOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              sx={{ maxWidth: 200 }}
-            >
-              <List>
-                {options.map((option: any) => (
-                  <MenuItem key={option} onClick={handleCategoriesMenuClose}>
-                    {option}
-                  </MenuItem>
-                ))}
-              </List>
-            </Popover>
-          </ListItem>
+          <ListItem>Dashboard</ListItem>
+          <ListItem>Courses</ListItem>
         </List>
       </div>
     </Drawer>

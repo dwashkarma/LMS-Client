@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { InputBase, IconButton, Paper, MenuItem } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { data } from "../jsonData/Data"; // Assuming your data is coming from here
+import InputField from "../shared/InputField";
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
@@ -20,38 +21,18 @@ const SearchBar = () => {
   );
 
   return (
-    <div className="relative  ">
-      <Paper
-        component="form"
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          borderRadius: "24px",
-          padding: "2px 4px",
-          width: "100%",
-          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-          maxWidth: { xs: "50%", sm: "60%", md: "80%", lg: "100%" },
-        }}
-      >
-        <InputBase
-          sx={{ ml: 1, flex: 1 }}
+    <div className="relative">
+      <div>
+        <InputField
+          type="text"
           placeholder="Search for anything..."
-          inputProps={{ "aria-label": "search for anything" }}
           value={search}
-          onChange={handleInputChange}
+          handleChange={handleInputChange}
           onKeyDown={() => handleSearch()}
-        />
-
-        <IconButton
-          type="button"
-          sx={{ p: "10px" }}
-          aria-label="search"
-          onClick={handleSearch}
-        >
-          <SearchIcon />
-        </IconButton>
-      </Paper>
-
+          name="search"
+          showAndornment={<SearchIcon />}
+        ></InputField>
+      </div>
       {/* Dropdown to show filtered results */}
       {search && filteredData.length > 0 && (
         <div
