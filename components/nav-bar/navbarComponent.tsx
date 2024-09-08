@@ -1,7 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import React, { MouseEvent, useState } from "react";
+import React, { MouseEvent, useContext, useState } from "react";
 import { signOut } from "next-auth/react";
 import {
   Avatar,
