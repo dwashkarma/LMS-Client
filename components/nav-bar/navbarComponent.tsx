@@ -31,34 +31,34 @@ const options = [
 
 
 // Styled components for search
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:active": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-    width: "auto",
-  },
-}));
+// const Search = styled("div")(({ theme }) => ({
+//   position: "relative",
+//   borderRadius: theme.shape.borderRadius,
+//   backgroundColor: alpha(theme.palette.common.white, 0.15),
+//   "&:active": {
+//     backgroundColor: alpha(theme.palette.common.white, 0.25),
+//   },
+//   marginRight: theme.spacing(2),
+//   marginLeft: 0,
+//   width: "100%",
+//   [theme.breakpoints.up("sm")]: {
+//     marginLeft: theme.spacing(3),
+//     width: "auto",
+//   },
+// }));
 
-const StyledInputBase = styled(TextField)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em -4px ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("lg")]: {
-      width: "54ch",
-    },
-  },
-}));
+// const StyledInputBase = styled(TextField)(({ theme }) => ({
+//   color: "inherit",
+//   "& .MuiInputBase-input": {
+//     padding: theme.spacing(1, 1, 1, 0),
+//     paddingLeft: `calc(1em -4px ${theme.spacing(4)})`,
+//     transition: theme.transitions.create("width"),
+//     width: "100%",
+//     [theme.breakpoints.up("lg")]: {
+//       width: "54ch",
+//     },
+//   },
+// }));
 
 const NavBarComponent: React.FC = () => {
   const { data: session } = useSession();
@@ -231,14 +231,7 @@ const NavBarComponent: React.FC = () => {
 
             {/* Search Bar Section */}
             <ListItem>
-              <Search sx={{ width: 'auto'}}>
-                <StyledInputBase
-                  type="text"
-                  name="search"
-                  placeholder="Search for anything..."
-                  inputProps={{ "aria-label": "search" }}
-                />
-              </Search>
+            <SearchComponent/>
             </ListItem>
 
             {/* Categories Button Section */}
@@ -255,7 +248,7 @@ const NavBarComponent: React.FC = () => {
                   horizontal: 'left',
                 }}
                 transformOrigin={{
-                  vertical: 'top',
+                  vertical: 'bottom',
                   horizontal: 'left',
                 }}
                 sx={{ maxWidth: 200 }}

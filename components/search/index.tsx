@@ -1,67 +1,76 @@
-import { alpha, styled, TextField } from '@mui/material';
 import React, { useState } from 'react';
+import { InputBase, IconButton, Paper, MenuItem } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import { data } from '../jsonData/Data'; // Assuming your data is coming from here
 
-// Styled TextField component
-const StyledInputBase = styled(TextField)(({ theme }) => ({
-    color: "inherit",
-    "& .MuiInputBase-input": {
-      padding: theme.spacing(1, 1, 1, 0),
-      paddingLeft: `calc(1em + -3px${theme.spacing(1)})`,
-      transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("md")]: {
-        width: "54ch", // Expand width for medium and larger screens
-      },
-    },
-}));
+const SearchBar = () => {
+  const [search, setSearch] = useState('');
 
-// Styled Search component
-const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:avtie": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%", // Make sure it takes full width on smaller screens
-    [theme.breakpoints.up("md")]: {
-      marginLeft: theme.spacing(3),
-      width: "auto", // Adjust width for larger screens
-    },
-}));
+  const handleInputChange = (e:any) => {
+    setSearch(e.target.value);
+  };
 
-const SearchComponent = () => {
-  const [value,setValue] = useState('');
-  console.log("success get the value from search element"+setValue)
+  const handleSearch = () => {
+    console.log('Searching for:', search);
+  };
+  const filteredData = data.filter((item) =>
+    search.toLowerCase() === '' ? false : item.first_name.toLowerCase().includes(search)
+  );
 
-  const newValue=(e: { target: { value: React.SetStateAction<string>; }; })=>{
-    setValue(e.target.value)
-  }
-  const searchValue = (searchItem: string)=>{
-    console.log("search success",searchItem)
-  }
   return (
-    <div className='hidden md:block lg:block'>
-      <Search>
-        <StyledInputBase
-          type="text"
-          name="search"
+    <div className='relative  md:block lg:block'>
+      <Paper
+        component="form"
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          borderRadius: '24px',    
+          padding: '2px 4px',       
+          width: '100%',    
+          boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', 
+          maxWidth: { xs: '50%', sm: '60%', md: '80%', lg: '100%' },
+        }}
+      >
+        <InputBase
+          sx={{ ml: 1, flex: 1 }}
           placeholder="Search for anything..."
-          inputProps={{ "aria-label": "search" }}
-          value={value}
-          onChange={newValue}
-          onKeyDown={()=>searchValue(value)}
-
+          inputProps={{ 'aria-label': 'search for anything' }}
+          value={search}
+          onChange={handleInputChange} 
+          onKeyDown={() => handleSearch()} 
         />
-      </Search>
-      <div className="flex items-center gap-4 text-2xl">
-        <button onClick={()=>searchValue}>search</button>
-      </div>
 
+        <IconButton
+          type="button"
+          sx={{ p: '10px' }}
+          aria-label="search"
+          onClick={handleSearch} 
+        >
+          <SearchIcon />
+        </IconButton>
+      </Paper>
+
+      {/* Dropdown to show filtered results */}
+      {search && filteredData.length > 0 && (
+        <div
+          style={{
+            position: 'absolute',
+            top: '100%',
+            left: 0,
+            zIndex: 10,
+            backgroundColor: 'white',
+            width: '70%',
+            // border: '1px solid #ccc',
+            borderRadius: '4px',
+          }}
+        >
+          {filteredData.map((item) => (
+            <MenuItem key={item.id}>{item.first_name}</MenuItem>
+          ))}
+        </div>
+      )}
     </div>
   );
-}
+};
 
-export default SearchComponent;
+export default SearchBar;

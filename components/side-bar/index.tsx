@@ -12,6 +12,7 @@ const SideBarComponent = () => {
   };
   //using the usePathname
   const pathName = usePathname();
+  console.log(pathName)
 
   return (
     <div className="w-[15%] h-[90dvh] hidden lg:flex flex-col justify-between p-4 shadow-xl border-primary border-r border-opacity-15">
@@ -20,7 +21,8 @@ const SideBarComponent = () => {
           const isActive = pathName === item.href;
           return (
             <button key = {item.href}
-              className={`text-start hover:bg-light hover:shadow p-2 rounded-md hover:text-slate-100 ${isActive ?"bg-primary text-white" : ""}`}
+              className={`text-start hover:bg-light hover:shadow p-2 rounded-md hover:text-slate-100 
+                ${isActive ?"bg-primary text-white" : ""}`}
               onClick={() => handleLink(item.href)}
             >
               <h2>{item.label}</h2>
