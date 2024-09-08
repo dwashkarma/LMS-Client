@@ -3,46 +3,123 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React, { MouseEvent, useContext, useState } from "react";
 import { signOut } from "next-auth/react";
-import { Avatar, Menu, MenuItem } from "@mui/material";
+import {
+  Avatar,
+  Menu,
+  MenuItem,
+  Drawer,
+  List,
+  ListItem,
+  IconButton,
+  Button,
+  Popover,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { DarkContext } from "@/providers/context/activeDark";
+import SearchComponent from "../search";
 
-const NavBarComponent: React.FC = () => {
+interface NavbarProps {
+  handleDrawerToggle: () => void;
+  categoriesOpen: any;
+  handleCategoriesMouseEnter: any;
+  options: any;
+  handleProfileMenuClick: any;
+  anchorEl: any;
+  categoriesAnchorEl: any;
+  handleCategoriesMenuClose: any;
+  handleProfileMenuClose: any;
+}
+const NavBarComponent: React.FC<NavbarProps> = ({
+  handleDrawerToggle,
+  categoriesOpen,
+  handleCategoriesMouseEnter,
+  options,
+  handleProfileMenuClick,
+  anchorEl,
+  categoriesAnchorEl,
+  handleCategoriesMenuClose,
+  handleProfileMenuClose,
+}) => {
   const { data: session } = useSession();
-  const { active, setActive } = useContext(DarkContext);
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   return (
-    <div
-      className={`${
-        !active
-          ? " bg-white flex justify-between items-center gap-4 p-4 px-8 h-[10dvh]  shadow border-b border-primary  border-opacity-15 "
-          : ""
-      }`}
-    >
-      <div className="flex items-center gap-16">
-        <div className="font-semibold flex items-center gap-4 text-primary text-2xl">
-          <Image src={"/logo.svg"} alt="logo" height={30} width={30} />
-          <span className="text-base">Learn Online</span>
+    <>
+      {/* Main Navbar */}
+      <div className="flex justify-between items-center p-4 text-md text-slate-600 shadow-lg relative">
+        {/* Menu Icon for Mobile */}
+        <div className="flex gap-2 items-center">
+          <IconButton
+            className="block "
+            color="inherit"
+            aria-label="menu"
+            onClick={handleDrawerToggle}
+          >
+            <MenuIcon />
+          </IconButton>
+          <div className="font-semibold flex items-center gap-4 text-primary text-2xl">
+            <Image
+              className="block"
+              src="/logo.svg"
+              alt="logo"
+              height={30}
+              width={30}
+            />
+            <span className="text-base">Learn Online</span>
+          </div>
         </div>
-        <div className="hidden md:block">Categories</div>
-      </div>
-      <div className="hidden md:block">
-        <input
-          type="text"
-          placeholder="Search"
-          className="p-3 border border-primary rounded-md hover:border-primary focus:border-primary"
-        />
-      </div>
-      <button onClick={handleClick}>
-        <div className="flex gap-2 items-center text-sm font-normal">
+
+        {/* Logo and Title */}
+        <div className="flex items-center gap-16">
+          {/* Categories Button with Popover */}
+          <div className="text-dark hidden md:block">
+            <Button
+              aria-label="categories"
+              id="categories-button"
+              aria-controls={categoriesOpen ? "categories-popover" : undefined}
+              aria-expanded={categoriesOpen ? "true" : undefined}
+              aria-haspopup="true"
+              onMouseEnter={handleCategoriesMouseEnter}
+              color="inherit"
+            >
+              <p className="text-base font-normal capitalize">Categories</p>
+              <ArrowDropDownIcon />
+            </Button>
+            <Popover
+              id="categories-popover"
+              anchorEl={categoriesAnchorEl}
+              open={categoriesOpen}
+              onClose={handleCategoriesMenuClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              sx={{ maxWidth: 200 }}
+            >
+              <List>
+                {options.map((option: any) => (
+                  <MenuItem key={option} onClick={handleCategoriesMenuClose}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </List>
+            </Popover>
+          </div>
+        </div>
+
+        {/* Search Bar */}
+        <div className="hidden lg:block">
+          <SearchComponent />
+        </div>
+        <div>Explore</div>
+        {/* Profile Button */}
+        <button
+          className="flex gap-2 items-center text-sm font-normal"
+          onClick={handleProfileMenuClick}
+        >
           {session?.user?.image ? (
             <Image
               className="rounded-full"
@@ -54,38 +131,35 @@ const NavBarComponent: React.FC = () => {
           ) : (
             <Avatar alt="profile">{session?.user?.name?.charAt(0)}</Avatar>
           )}
-          <h2 className="hidden md:block">{session?.user?.email}</h2>
+          <h2 className="hidden lg:block">{session?.user?.email}</h2>
           <ArrowDropDownIcon />
-        </div>
-      </button>
+        </button>
 
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
-        }}
-      >
-        <MenuItem
-          onClick={() => {
-            signOut();
-            handleClose();
+        <Menu
+          id="profile-menu"
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleProfileMenuClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "left",
           }}
         >
-          Logout
-        </MenuItem>
-      </Menu>
-    </div>
+          <MenuItem
+            onClick={() => {
+              signOut();
+              handleProfileMenuClose();
+            }}
+          >
+            Logout
+          </MenuItem>
+        </Menu>
+      </div>
+    </>
   );
 };
 

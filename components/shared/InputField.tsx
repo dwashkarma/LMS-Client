@@ -1,9 +1,10 @@
+import { InputAdornment } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { ChangeEvent } from "react";
 
 interface InputTypes {
   name: string;
-  label: string;
+  label?: string;
   value: string;
   helperText?: string;
   errors?: boolean;
@@ -12,6 +13,9 @@ interface InputTypes {
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   handleBlur?: any;
+  placeholder?: string;
+  onKeyDown?: any;
+  showAndornment?: any;
 }
 const InputField: React.FC<InputTypes> = ({
   name,
@@ -22,9 +26,13 @@ const InputField: React.FC<InputTypes> = ({
   errors,
   handleChange,
   handleBlur,
+  placeholder,
+  onKeyDown,
+  showAndornment,
 }) => {
   return (
     <TextField
+      placeholder={placeholder}
       fullWidth
       name={name}
       value={value}
@@ -35,6 +43,14 @@ const InputField: React.FC<InputTypes> = ({
       onChange={handleChange}
       helperText={helperText}
       error={errors}
+      onKeyDown={onKeyDown}
+      InputProps={
+        showAndornment && {
+          endAdornment: (
+            <InputAdornment position="end">{showAndornment}</InputAdornment>
+          ),
+        }
+      }
     />
   );
 };
