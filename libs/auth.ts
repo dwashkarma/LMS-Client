@@ -52,6 +52,33 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async jwt({ account, token, user, profile, session, trigger }) {
+      if (account) {
+        console.log(account);
+        console.log(token);
+        console.log(user);
+        console.log(profile);
+        console.log(session);
+        console.log(trigger);
+        token.name = user.name;
+        token.email = user.email;
+        token.sub = user.id;
+        token.picture = user.image;
+      }
+      console.log(token);
+      return token;
+    },
+
+    async session({ session, token }) {
+      console.log(session);
+      console.log(token);
+
+      return session;
+    },
+  },
+
   // pages: {
   //   signIn: "/",
   // },

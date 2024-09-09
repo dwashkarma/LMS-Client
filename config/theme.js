@@ -11,10 +11,10 @@ const {
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "hsl(var(--primary))",
+      main: "hsl(var(--chart-2))",
     },
     secondary: {
-      main: "hsl(var(--secondary))",
+      main: "hsl(var(--chart-2))",
     },
   },
   typography: {
@@ -33,7 +33,6 @@ export const theme = createTheme({
         notchedOutline: {
           borderRadius: "10px",
           backgroundColor: "hsl(var(--dark))",
-
           borderColor: "hsl(var(--light))",
         },
 
