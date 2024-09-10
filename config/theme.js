@@ -14,7 +14,10 @@ export const theme = createTheme({
       main: "hsl(var(--chart-2))",
     },
     secondary: {
-      main: "hsl(var(--chart-2))",
+      main: "hsl(var(--chart-3))",
+    },
+    success: {
+      main: "hsl(var(--input))",
     },
   },
   typography: {
