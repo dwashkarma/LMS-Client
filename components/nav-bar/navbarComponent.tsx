@@ -45,7 +45,7 @@ const NavBarComponent: React.FC<NavbarProps> = ({
   return (
     <>
       {/* Main Navbar */}
-      <div className="flex justify-between items-center p-4 text-md text-slate-600 shadow-lg relative">
+      <div className="flex justify-between items-center p-4 text-md text-slate-600 shadow-lg sticky  md:top-0 z-[900] bg-secondary">
         {/* Menu Icon for Mobile */}
         <div className="flex gap-2 items-center">
           <IconButton

@@ -61,16 +61,16 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async jwt({ account, token, user, trigger }) {
-      console.log(account);
-      console.log(token);
-      console.log(user);
-      console.log(trigger);
+      // console.log(account);
+      // console.log(token);
+      // console.log(user);
+      // console.log(trigger);
 
       return token;
     },
 
     async session({ session, token }) {
-      console.log(session);
+      // console.log(session);
       return session;
     },
     async signIn({ profile }) {
