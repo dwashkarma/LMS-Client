@@ -3,9 +3,9 @@ import CardComponent from "@/components/shared/CardComponent";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-function page() {
+const Test = () => {
   const [recentCourses, setRecentCourses] = useState<any>([
-    { name: "he", a: "asca" },
+    { name: "loading", a: "loading" },
   ]);
 
   useEffect(() => {
@@ -20,6 +20,7 @@ function page() {
       {recentCourses.map((item: any, index: number) => {
         return (
           <CardComponent
+            key={index}
             title={item?.name}
             footer={<div>{item?.tag?.length > 1 ? item?.tag : null}</div>}
             imageurl="/logo.svg"
@@ -31,6 +32,6 @@ function page() {
       })}
     </div>
   );
-}
+};
 
-export default page;
+export default Test;

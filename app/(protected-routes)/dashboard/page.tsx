@@ -69,6 +69,7 @@ export default function Home() {
         {recentCourses.map((item: any, index: number) => {
           return (
             <CardComponent
+              key={index}
               title={item?.name}
               footer={<div>{item?.tag?.length > 1 ? item?.tag : null}</div>}
               imageurl="/logo.svg"
