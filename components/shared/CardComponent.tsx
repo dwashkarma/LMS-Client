@@ -22,7 +22,7 @@ const CardComponent: React.FC<CardProps> = ({
   return (
     <Card>
       {imageurl && (
-        <div className="h-[9rem] w-[100%] bg-secondary-foreground">
+        <div className="h-60 lg:h-[9rem] w-[100%] bg-secondary-foreground">
           <Image
             src={imageurl}
             alt={title ? title : ""}

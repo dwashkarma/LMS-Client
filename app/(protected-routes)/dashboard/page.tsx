@@ -24,20 +24,23 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="mx-28  flex flex-col  gap-6 my-6 ">
+    <div className="mx-5 lg:mx-28  flex flex-col  gap-6 my-6 ">
       <div className="flex gap-2 items-center">
         <Avatar sx={{ bgcolor: "chocolate" }}>
           {session ? session?.user?.name?.slice(0, 1) : ""}
         </Avatar>
         <h2 className="text-2xl font-semibold">
-          Welcome Back! {session?.user?.name}{" "}
+          Welcome!{" "}
+          <span className="font-serif text-secondary">
+            {session?.user?.name}{" "}
+          </span>
         </h2>
       </div>
       {/* <div className="md:w-[80vw] lg:w-[88svw]">
         <CarouselCard content={content} />
       </div> */}
       <CardComponent>
-        <div className="flex gap-16  ">
+        <div className="md:flex-row flex-col flex gap-16  ">
           <Image src={"/next.svg"} height={500} width={500} alt="pic" />{" "}
           <div className="flex flex-col gap-3">
             <h3 className="font-semibold text-lg">
@@ -62,7 +65,7 @@ export default function Home() {
       </CardComponent>
       <Divider />
       <h2 className="text-2xl font-medium text-chart-1">Recommended for you</h2>
-      <div className="grid grid-cols-4  gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-6">
         {recentCourses.map((item: any, index: number) => {
           return (
             <CardComponent
