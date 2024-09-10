@@ -5,6 +5,12 @@ import { connectDB } from "./mongodb";
 import User from "@/modals/User";
 import bcrypt from "bcryptjs";
 
+interface ExtendedProfile {
+  sub: string;
+  email: string;
+  picture: string;
+  name: string;
+}
 export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
@@ -52,6 +58,48 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async jwt({ account, token, user, trigger }) {
+      // console.log(account);
+      // console.log(token);
+      // console.log(user);
+      // console.log(trigger);
+
+      return token;
+    },
+
+    async session({ session, token }) {
+      // console.log(session);
+      return session;
+    },
+    async signIn({ profile }) {
+      console.log(profile);
+      const extendedProfile = profile as ExtendedProfile;
+      console.log(extendedProfile);
+      try {
+        await connectDB();
+        console.log("connected to database");
+        const userExits = await User.findOne({
+          email: extendedProfile?.email,
+        });
+
+        if (!userExits) {
+          const user = await User.create({
+            id: extendedProfile?.sub,
+            email: extendedProfile?.email,
+            name: extendedProfile?.name,
+            image: extendedProfile?.picture,
+          });
+        }
+        return true;
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+    },
+  },
+
   // pages: {
   //   signIn: "/",
   // },

@@ -7,13 +7,17 @@ const {
     extend: { colors },
   },
 } = tailwindConfig;
+
 export const theme = createTheme({
   palette: {
     primary: {
-      main: colors["primary"],
+      main: "hsl(var(--chart-2))",
     },
     secondary: {
-      main: colors["secondary"],
+      main: "hsl(var(--chart-3))",
+    },
+    success: {
+      main: "hsl(var(--input))",
     },
   },
   typography: {
@@ -23,8 +27,7 @@ export const theme = createTheme({
     MuiTextField: {
       styleOverrides: {
         root: {
-          "--TextField-brandBorderHoverColor": colors["primary"],
-          "--TextField-brandBorderFocusedColor": colors["primary"],
+          borderRadius: "10px",
         },
       },
     },
@@ -32,13 +35,17 @@ export const theme = createTheme({
       styleOverrides: {
         notchedOutline: {
           borderRadius: "10px",
+          backgroundColor: "hsl(var(--dark))",
+          borderColor: "hsl(var(--light))",
         },
+
         root: {
           [`&:hover .${outlinedInputClasses.notchedOutline}`]: {
-            borderColor: "var(--TextField-brandBorderHoverColor)",
+            borderColor: "hsl(var(--dark))",
           },
           [`&.Mui-focused .${outlinedInputClasses.notchedOutline}`]: {
-            borderColor: "var(--TextField-brandBorderHoverColor)",
+            borderColor: "hsl(var(--borders))",
+            borderRadius: "10px",
           },
         },
       },

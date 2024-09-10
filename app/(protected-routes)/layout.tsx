@@ -65,20 +65,19 @@ export default function RootLayout({
         handleProfileMenuClick={handleProfileMenuClick}
         handleDrawerToggle={handleDrawerToggle}
       />
-      <div className="lg:flex">
-        {/* <SideBarComponent /> */}
-        {/* Drawer Menu for Mobile */}
-        <DrawerComponent
-          categoriesAnchorEl={categoriesAnchorEl}
-          categoriesOpen={categoriesOpen}
-          drawerOpen={drawerOpen}
-          handleCategoriesMenuClose={handleCategoriesMenuClose}
-          handleCategoriesMouseEnter={handleCategoriesMouseEnter}
-          handleDrawerClose={handleDrawerClose}
-          options={options}
-        />
-        {children}
-      </div>
+
+      {/* <SideBarComponent /> */}
+      {/* Drawer Menu for Mobile */}
+      <DrawerComponent
+        categoriesAnchorEl={categoriesAnchorEl}
+        categoriesOpen={categoriesOpen}
+        drawerOpen={drawerOpen}
+        handleCategoriesMenuClose={handleCategoriesMenuClose}
+        handleCategoriesMouseEnter={handleCategoriesMouseEnter}
+        handleDrawerClose={handleDrawerClose}
+        options={options}
+      />
+      {children}
     </div>
   );
 }
