@@ -12,7 +12,7 @@ function CarouselCard({
   content: { id: number; title: string; description: string }[];
 }) {
   return (
-    <div className="max-w-[80rem] min-h-[10%]">
+    <div className="max-w-[100%]  min-h-[10%]">
       <Swiper
         slidesPerView={1}
         spaceBetween={0}

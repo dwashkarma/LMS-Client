@@ -8,7 +8,7 @@ import {
 } from "../ui/card";
 
 interface CardProps {
-  title: string;
+  title?: string;
   children: React.ReactNode;
   footer?: React.ReactNode;
   imageurl?: string;
@@ -22,10 +22,10 @@ const CardComponent: React.FC<CardProps> = ({
   return (
     <Card>
       {imageurl && (
-        <div className="h-[9rem] w-auto bg-secondary-foreground">
+        <div className="h-[9rem] w-[100%] bg-secondary-foreground">
           <Image
             src={imageurl}
-            alt={title}
+            alt={title ? title : ""}
             aria-label={title}
             className="w-[100%] h-[100%]"
             width={100}

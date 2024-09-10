@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply text-primary bg-slate-100 w-[100vw];
+  @apply text-primary bg-slate-100;
 }
 
 @layer base {
