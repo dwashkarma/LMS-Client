@@ -10,7 +10,7 @@ const Test = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/courses")
+      .get(`${process.env.NEXT_PUBLIC_BASEURL}/courses`)
       .then((res) => res.data)
       .then((res) => setRecentCourses(res));
   }, []);
