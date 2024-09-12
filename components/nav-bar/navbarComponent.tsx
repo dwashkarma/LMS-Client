@@ -7,9 +7,7 @@ import {
   Avatar,
   Menu,
   MenuItem,
-  Drawer,
   List,
-  ListItem,
   IconButton,
   Button,
   Popover,
@@ -78,7 +76,7 @@ const NavBarComponent: React.FC<NavbarProps> = ({
               aria-controls={categoriesOpen ? "categories-popover" : undefined}
               aria-expanded={categoriesOpen ? "true" : undefined}
               aria-haspopup="true"
-              onMouseEnter={handleCategoriesMouseEnter}
+              onClick={handleCategoriesMouseEnter}
               color="inherit"
             >
               <p className="text-base font-normal capitalize">Categories</p>

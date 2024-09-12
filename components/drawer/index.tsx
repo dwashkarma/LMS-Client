@@ -11,6 +11,8 @@ import Image from "next/image";
 import CloseIcon from "@mui/icons-material/Close";
 import SearchComponent from "@/components/search/index";
 import React from "react";
+import SideBarComponent from "../side-bar";
+import SearchBar from "@/components/search/index";
 
 interface DrawerProps {
   drawerOpen: any;
@@ -35,11 +37,8 @@ const DrawerComponent: React.FC<DrawerProps> = ({
       <div
         style={{ width: 250, display: "flex", flexDirection: "column" }}
         role="presentation"
-        // onClick={handleDrawerClose}
-        // onKeyDown={handleDrawerClose}
+        
       >
-        {/* Logo and Title Section */}
-
         <div className="font-semibold flex items-center justify-between w-full gap-4 p-6 text-primary text-2xl">
           <div className="flex items-center gap-4">
             {" "}
@@ -52,10 +51,8 @@ const DrawerComponent: React.FC<DrawerProps> = ({
         </div>
         <Divider />
         <List>
-          <ListItem>Search</ListItem>
-
-          <ListItem>Dashboard</ListItem>
-          <ListItem>Courses</ListItem>
+          <ListItem><SearchBar/></ListItem>
+          <ListItem><SideBarComponent/></ListItem>
         </List>
       </div>
     </Drawer>

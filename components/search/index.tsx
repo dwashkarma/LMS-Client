@@ -1,14 +1,8 @@
 import React, { useState } from "react";
-import {
-  InputBase,
-  IconButton,
-  Paper,
-  MenuItem,
-  MenuList,
-} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { data } from "../jsonData/Data"; // Assuming your data is coming from here
 import InputField from "../shared/InputField";
+import { MenuItem } from "@mui/material";
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
@@ -26,6 +20,8 @@ const SearchBar = () => {
       : item.first_name.toLowerCase().includes(search)
   );
 
+  
+
   return (
     <>
       <div className="relative ">
@@ -38,18 +34,17 @@ const SearchBar = () => {
           name="search"
           showAndornment={<SearchIcon />}
         />
-        {/* Dropdown to show filtered results */}
-
         <div
           style={{
             position: "absolute",
             top: "100%",
             width: "100%",
+            zIndex:"100",
             backgroundColor: "white",
             borderRadius: "4px",
           }}
         >
-          {filteredData.map((item) => (
+          {filteredData.slice(0,20).map((item) => (
             <MenuItem key={item.id}>{item.first_name}</MenuItem>
           ))}
         </div>

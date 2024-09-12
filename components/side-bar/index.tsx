@@ -15,7 +15,7 @@ const SideBarComponent = () => {
   console.log(pathName)
 
   return (
-    <div className="w-[15%] h-[90dvh] hidden lg:flex flex-col justify-between p-4 shadow-xl border-primary border-r border-opacity-15">
+    <div className="w-[100%] h-[90dvh] lg:flex flex-col justify-between p-4 shadow-xl border-primary border-r border-opacity-15">
       <div className="flex  flex-col gap-2">
         {links.map((item) => {
           const isActive = pathName === item.href;
@@ -30,8 +30,6 @@ const SideBarComponent = () => {
           );
         })}
       </div>
-
-      <div>footer</div>
     </div>
   );
 };
