@@ -4,6 +4,7 @@ import "./globals.css";
 import ThemeProviders from "@/providers/ThemeProviders";
 import SessionProviders from "@/providers/SessionProvider";
 import { ToastProvider } from "@/providers/ToastProvider";
+import QueryProvider from "@/providers/QueryProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -24,12 +25,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <ThemeProviders>
-          <SessionProviders>
-            <ToastProvider />
-            {children}
-          </SessionProviders>
-        </ThemeProviders>
+        <QueryProvider>
+          <ThemeProviders>
+            <SessionProviders>
+              <ToastProvider />
+              {children}
+            </SessionProviders>
+          </ThemeProviders>
+        </QueryProvider>
       </body>
     </html>
   );

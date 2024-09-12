@@ -37,6 +37,8 @@ const UserSchema = new Schema<UserDocument>(
       // required: [true, "Password is required"],
       select: false,
     },
+
+    
   },
   { timestamps: true }
 );

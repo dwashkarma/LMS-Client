@@ -4,11 +4,13 @@ interface ButtonPropTypes {
   handleClick: () => void;
   children: React.ReactNode;
   disable?: boolean;
+  color?: "primary" | "secondary" | "info" | "error" | "success";
 }
 const ButtonComponent: React.FC<ButtonPropTypes> = ({
   handleClick,
   children,
   disable,
+  color = "primary",
 }) => {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
     if (event.key === "Enter") {
@@ -21,6 +23,8 @@ const ButtonComponent: React.FC<ButtonPropTypes> = ({
       onClick={handleClick}
       onKeyDown={() => handleKeyDown}
       variant="contained"
+      color={color}
+      className="text-white"
     >
       {children}
     </Button>

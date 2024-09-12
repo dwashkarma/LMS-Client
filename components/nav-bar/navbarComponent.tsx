@@ -1,7 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import React, { MouseEvent, useState } from "react";
+import React, { MouseEvent, useContext, useState } from "react";
 import { signOut } from "next-auth/react";
 import {
   Avatar,
@@ -43,7 +43,7 @@ const NavBarComponent: React.FC<NavbarProps> = ({
   return (
     <>
       {/* Main Navbar */}
-      <div className="flex justify-between items-center p-4 text-md text-slate-600 shadow-lg relative">
+      <div className="flex justify-between items-center p-4 text-md text-slate-600 shadow-lg sticky  md:top-0 z-[900] bg-card">
         {/* Menu Icon for Mobile */}
         <div className="flex gap-2 items-center">
           <IconButton

@@ -9,6 +9,7 @@ import { redirect, useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import { CircularProgress } from "@mui/material";
 import toast from "react-hot-toast";
+import Image from "next/image";
 
 const loginValues = {
   email: "",
@@ -37,7 +38,6 @@ const LoginPage = () => {
 
           if (response?.error) {
             toast.error(response?.error);
-            // showToastMessage(response?.error, "error");
           }
         } catch (error) {
           console.log(error);
@@ -59,7 +59,7 @@ const LoginPage = () => {
     redirect("/dashboard");
   }
   return (
-    <div className="shadow border lg:w-[30%] shadow-slate-200 rounded-lg p-8  grid gap-8">
+    <div className="shadow border lg:w-[30%]  rounded-lg p-8  grid gap-8">
       <h2 className="text-center font-normal text-xl uppercase text-primary">
         Login Page
       </h2>
@@ -90,12 +90,37 @@ const LoginPage = () => {
         helperText={touched.password ? errors.password : ""}
         errors={touched.password && Boolean(errors.password)}
       />
-      <div className="text-end grid gap-2">
+      <div className="text-end grid gap-3">
         <ButtonComponent handleClick={handleSubmit}>Login</ButtonComponent>
+        <ButtonComponent handleClick={() => signIn("google")} color="success">
+          <div className="flex gap-3 items-center text-primary capitalize">
+            <Image
+              src={"/images/googleLogo.svg"}
+              alt="googleIcon"
+              aria-label="googleIcon"
+              height={30}
+              width={30}
+            />
+            <p>Google</p>
+          </div>
+        </ButtonComponent>
+        {/* <ButtonComponent handleClick={() => signIn("github")} color="success">
+          <div className="flex gap-3 items-center text-primary capitalize">
+            <Image
+              src={"/images/github.svg"}
+              alt="githublogo"
+              aria-label="githublogo"
+              height={30}
+              width={30}
+            />
+            <p>Github</p>
+          </div>
+        </ButtonComponent> */}
+
         <div>
           <span
             onClick={() => router.push("/register")}
-            className="text-end  hover:border-b cursor-pointer hover:border-b-light text-xs font-normal"
+            className="text-end  hover:border-b cursor-pointer hover:border-b-foreground text-xs font-normal"
           >
             Create an account
           </span>

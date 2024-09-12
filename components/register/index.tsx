@@ -68,7 +68,7 @@ const RegisterComponent = () => {
   };
 
   return (
-    <div className="shadow border lg:w-[30%] shadow-slate-200 rounded-lg p-8  grid gap-8">
+    <div className="shadow border lg:w-[30%]  rounded-lg p-8  grid gap-8">
       <h2 className="text-center font-normal text-xl uppercase text-primary">
         Register Page
       </h2>
@@ -129,7 +129,7 @@ const RegisterComponent = () => {
         <div>
           <span
             onClick={() => router.push("/")}
-            className="text-end  hover:border-b cursor-pointer hover:border-b-light text-xs font-normal"
+            className="text-end  hover:border-b cursor-pointer hover:border-b-foreground text-xs font-normal"
           >
             Already have an account
           </span>
