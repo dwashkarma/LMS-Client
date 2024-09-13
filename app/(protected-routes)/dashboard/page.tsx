@@ -2,16 +2,12 @@
 import CardComponent from "@/components/shared/CardComponent";
 import CarouselCard from "@/components/shared/CarouselCard";
 import SkeletonComponent from "@/components/shared/SkeletonComponent";
-import { Avatar, Divider, Skeleton } from "@mui/material";
+import { Avatar, Divider } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-const content = [
-  { id: 1, title: "Why us?", description: "loremlorem" },
-  { id: 2, title: "What we Offer?", description: "loremlorem" },
-];
+
 export default function Home() {
   const { data: session } = useSession();
 
@@ -23,7 +19,6 @@ export default function Home() {
         .then((res) => res.data);
     },
   });
-  console.log(data);
 
   return (
     <div className="mx-5 lg:mx-28  flex flex-col  gap-6 my-6 ">
