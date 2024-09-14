@@ -2,16 +2,18 @@
 import CardComponent from "@/components/shared/CardComponent";
 import CarouselCard from "@/components/shared/CarouselCard";
 import SkeletonComponent from "@/components/shared/SkeletonComponent";
+import TabComponent from "@/components/tabs";
 import { Avatar, Divider } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { error } from "console";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 
 export default function Home() {
   const { data: session } = useSession();
 
-  const { data } = useQuery({
+  const { data, error } = useQuery({
     queryKey: ["recentCourses"],
     queryFn: async () => {
       return await axios
@@ -47,22 +49,31 @@ export default function Home() {
               Learn and practise with our talented instructors.
             </p>
             <p className="font-light text-xs">By Dwash Karma</p>
-            <p className="text-sm font-medium">
-              Updated{" "}
-              <span className="text-chart-2 text-medium ">4 hours ago</span>
-            </p>
-            <div className="text-end">
+            <div className="text-sm font-medium flex justify-between items-center">
+              <div>
+                Updated{" "}
+                <span className="text-chart-2 text-medium ">4 hours ago</span>
+              </div>
               <span className="bg-dark p-2 text-white text-sm">
                 Best Seller
               </span>
             </div>
-            <div className="text-lg font-semibold">$ 12.99</div>
+            <div className="text-end"></div>
+            <div className="text-lg  flex gap-4">
+              <span className="font-semibold">$ 12.99</span>
+              <span
+                className=" font-light text-slate-500"
+                style={{ textDecoration: "line-through" }}
+              >
+                $ 18.99
+              </span>
+            </div>
           </div>
         </div>
       </CardComponent>
       <Divider />
       <h2 className="text-2xl font-medium text-chart-1">Recommended for you</h2>
-
+      <TabComponent />
       {data ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-6">
           {data?.map((item: any, index: number) => {
@@ -70,11 +81,29 @@ export default function Home() {
               <CardComponent
                 key={index}
                 title={item?.name}
-                footer={<div>{item?.tag?.length > 1 ? item?.tag : null}</div>}
+                footer={
+                  <div className="bg-secondary p-2 text-white">
+                    {item?.tag?.length > 1 ? item?.tag : null}
+                  </div>
+                }
                 imageurl="/logo.svg"
               >
-                <div>{item?.author}</div>
-                <div>{item?.price}</div>
+                <div className="text-xs">{item?.author}</div>
+                <div className="flex justify-between items-center gap-2">
+                  <div className="">
+                    <span> $ {item?.discountedPrice}</span>
+                    <span
+                      className="text-slate-400"
+                      style={{ textDecoration: "line-through" }}
+                    >
+                      {" "}
+                      $ {item?.totalPrice}
+                    </span>
+                  </div>
+                  <div className="bg-secondary p-2 rounded text-sm text-white">
+                    {item?.tag}
+                  </div>
+                </div>
               </CardComponent>
             );
           })}

@@ -36,14 +36,7 @@ const CardComponent: React.FC<CardProps> = ({
       <CardHeader>
         <CardTitle>{title}</CardTitle>
       </CardHeader>
-      <CardContent>
-        <span>{children}</span>
-      </CardContent>
-      {footer && footer !== "" && (
-        <CardFooter className="text-sm flex justify-end">
-          <span>{footer}</span>
-        </CardFooter>
-      )}
+      <CardContent>{children}</CardContent>
     </Card>
   );
 };
