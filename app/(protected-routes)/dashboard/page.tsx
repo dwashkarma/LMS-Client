@@ -22,7 +22,6 @@ export default function Home() {
     },
   });
 
-  console.log(data);
   return (
     <div className="mx-5 lg:mx-28  flex flex-col  gap-6 my-6 ">
       <div className="flex gap-2 items-center">
@@ -78,7 +77,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-6">
           {data?.map((item: any, index: number) => {
             return (
-              <Link href={`/courses/${item._id}`}>
+              <Link key={index} href={`/courses/${item._id}`}>
                 <CardComponent key={index} data={item} imageurl="/logo.svg" />
               </Link>
             );
