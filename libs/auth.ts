@@ -5,7 +5,8 @@ import { connectDB } from "./mongodb";
 import User from "@/modals/User";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { use } from "react";
+import { NextResponse } from "next/server";
+
 export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
@@ -27,13 +28,14 @@ export const authOptions: NextAuthOptions = {
         try {
           //connect to the database first
           await connectDB();
-
+          console.log("asckjasb");
           //find the user with email id
           const userExists = await User.findOne({
             email: credentials?.email,
           }).select("+password");
 
           if (!userExists) {
+            console.log("ascba");
             throw new Error("Invalid email!");
           }
           //.select("+password") is neccessary to get password from database and to compare it.......
@@ -63,8 +65,8 @@ export const authOptions: NextAuthOptions = {
             email: userExists.email,
             accessToken: accessToken,
           };
-        } catch (error) {
-          return null;
+        } catch (error: any) {
+          throw new Error(error.message || "An error occured");
         }
       },
     }),
@@ -97,12 +99,12 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
 
-    async signIn({ user, account, profile, email, credentials }) {
-      if (user) {
-        return true;
-      }
-      return false;
-    },
+    // async signIn({ user, account, profile, email, credentials }) {
+    //   if (user) {
+    //     return true;
+    //   }
+    //   return false;
+    // },
     // async signIn({ profile }) {
     //   console.log(profile);
     //   const extendedProfile = profile as ExtendedProfile;
