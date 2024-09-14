@@ -92,8 +92,8 @@ const LoginPage = () => {
       />
       <div className="text-end grid gap-3">
         <ButtonComponent handleClick={handleSubmit}>Login</ButtonComponent>
-        <ButtonComponent handleClick={() => signIn("google")} color="success">
-          <div className="flex gap-3 items-center text-primary capitalize">
+        <ButtonComponent handleClick={() => signIn("google")} color="info">
+          <div className="flex gap-3 items-center  capitalize">
             <Image
               src={"/images/googleLogo.svg"}
               alt="googleIcon"
