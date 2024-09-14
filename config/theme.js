@@ -11,13 +11,10 @@ const {
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "hsl(var(--chart-2))",
+      main: colors.primary,
     },
     secondary: {
-      main: "hsl(var(--chart-3))",
-    },
-    success: {
-      main: "hsl(var(--input))",
+      main: colors.secondary,
     },
   },
   typography: {

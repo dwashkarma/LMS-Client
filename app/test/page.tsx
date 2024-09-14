@@ -18,17 +18,7 @@ const Test = () => {
   return (
     <div className="grid grid-cols-4 p-8 gap-4">
       {recentCourses.map((item: any, index: number) => {
-        return (
-          <CardComponent
-            key={index}
-            title={item?.name}
-            footer={<div>{item?.tag?.length > 1 ? item?.tag : null}</div>}
-            imageurl="/logo.svg"
-          >
-            <div>{item?.author}</div>
-            <div>{item?.price}</div>
-          </CardComponent>
-        );
+        return <p key={index}>hello</p>;
       })}
     </div>
   );
