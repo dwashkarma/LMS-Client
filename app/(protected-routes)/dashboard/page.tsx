@@ -29,8 +29,8 @@ export default function Home() {
           {session ? session?.user?.name?.slice(0, 1) : ""}
         </Avatar>
         <h2 className="text-2xl font-semibold">
-          Welcome!{" "}
-          <span className="font-serif text-secondary">
+          Welcome!
+          <span className="font-serif text-primary">
             {session?.user?.name}{" "}
           </span>
         </h2>
@@ -52,7 +52,7 @@ export default function Home() {
             <div className="text-sm font-medium flex justify-between items-center">
               <div>
                 Updated{" "}
-                <span className="text-chart-2 text-medium ">4 hours ago</span>
+                <span className="text-light text-medium ">4 hours ago</span>
               </div>
               <span className="bg-dark p-2 text-white text-sm">
                 Best Seller

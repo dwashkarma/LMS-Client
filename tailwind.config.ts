@@ -15,16 +15,12 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        dark: "#122620",
-        light: "#d6ad60",
+        primary: "#0d7c66",
+        secondary: "#41B3A2",
+        rating: "#faaf00",
+        dark: "#021526",
+        light: "#758694",
+        danger: "#e76e50",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

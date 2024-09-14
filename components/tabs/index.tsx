@@ -20,7 +20,7 @@ const TabComponent = (props: Props) => {
 
   return (
     <div>
-      <Tabs value={value} onChange={handleChange} textColor="secondary">
+      <Tabs value={value} onChange={handleChange} textColor="primary">
         <Tab label="NextJS" {...a11yProps(0)} />
         <Tab label="JavaScript" {...a11yProps(1)} />
         <Tab label="DOTNET ASP" {...a11yProps(2)} />
