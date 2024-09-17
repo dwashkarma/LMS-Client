@@ -3,9 +3,9 @@ import CardComponent from "@/components/shared/CardComponent";
 import CarouselCard from "@/components/shared/CarouselCard";
 import SkeletonComponent from "@/components/shared/SkeletonComponent";
 import TabComponent from "@/components/tabs";
+import { axiosInstance } from "@/config/axiosInstance";
 import { Avatar, Divider, Rating } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,9 +16,7 @@ export default function Home() {
   const { data, error } = useQuery({
     queryKey: ["recentCourses"],
     queryFn: async () => {
-      return await axios
-        .get(`${process.env.NEXT_PUBLIC_BASEURL}/courses`)
-        .then((res) => res.data);
+      return await axiosInstance.get("/courses").then((res) => res.data);
     },
   });
 
