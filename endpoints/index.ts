@@ -1,3 +1,4 @@
 const coursesEndpoints = "/courses";
 
-export { coursesEndpoints };
+const courseIdEndpoints = (id: string) => `courses/${id}`;
+export { coursesEndpoints, courseIdEndpoints };

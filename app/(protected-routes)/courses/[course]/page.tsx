@@ -1,6 +1,8 @@
 "use client";
+import { useCourseId } from "@/api-services";
 import AccordionComponent from "@/components/accordian";
 import BreadCrumbsComponent from "@/components/breadcrumbs";
+import { axiosInstance } from "@/config/axiosInstance";
 import { Rating } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -15,15 +17,7 @@ const relatedTags = [
 function CoursePage({ params }: { params: any }) {
   const course = params.course;
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["course", course],
-    queryFn: async () => {
-      return await axios
-        .get(`${process.env.NEXT_PUBLIC_BASEURL}/courses/${course}`)
-        .then((res) => res.data);
-    },
-    enabled: !!course,
-  });
+  const { data, isLoading, error } = useCourseId(course);
 
   return (
     !isLoading && (
