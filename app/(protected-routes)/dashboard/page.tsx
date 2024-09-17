@@ -1,4 +1,5 @@
 "use client";
+import { useCourses } from "@/api-services";
 import CardComponent from "@/components/shared/CardComponent";
 import CarouselCard from "@/components/shared/CarouselCard";
 import SkeletonComponent from "@/components/shared/SkeletonComponent";
@@ -9,16 +10,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 export default function Home() {
   const { data: session } = useSession();
 
-  const { data, error } = useQuery({
-    queryKey: ["recentCourses"],
-    queryFn: async () => {
-      return await axiosInstance.get("/courses").then((res) => res.data);
-    },
-  });
+  const { data, error, isLoading } = useCourses();
 
   return (
     <div className="mx-5 lg:mx-28  flex flex-col  gap-6 my-6 ">
