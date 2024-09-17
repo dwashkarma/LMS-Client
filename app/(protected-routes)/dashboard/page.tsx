@@ -47,7 +47,7 @@ export default function Home() {
             Learn and practise with our talented instructors.
           </p>
           <p className="font-light text-base text-primary">By Dwash Karma</p>
-          <Rating value={3.5} precision={0.5} />
+          <Rating value={3.5} precision={0.5} readOnly />
           <div className="text-sm font-medium flex justify-between items-center">
             <div>
               Updated{" "}
