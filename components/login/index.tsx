@@ -22,6 +22,7 @@ const loginSchema = yup.object().shape({
 });
 const LoginPage = () => {
   const [passwordType, setPasswordType] = useState(false);
+  const [loading, setloading] = useState(false);
   const router = useRouter();
   const { data: session, status } = useSession();
   const { values, handleBlur, handleChange, touched, errors, handleSubmit } =
@@ -29,12 +30,16 @@ const LoginPage = () => {
       initialValues: loginValues,
       validationSchema: loginSchema,
       onSubmit: async () => {
+        setloading(true);
         try {
           const response = await signIn("credentials", {
             email: values.email,
             password: values.password,
             redirect: false,
           });
+          if (response) {
+            setloading(false);
+          }
 
           if (response?.error) {
             toast.error(response?.error);
@@ -48,6 +53,7 @@ const LoginPage = () => {
   const handleClickPassword = () => {
     setPasswordType(!passwordType);
   };
+  console.log(status);
   if (status === "loading") {
     return (
       <div>
@@ -91,7 +97,13 @@ const LoginPage = () => {
         errors={touched.password && Boolean(errors.password)}
       />
       <div className="text-end grid gap-3">
-        <ButtonComponent handleClick={handleSubmit}>Login</ButtonComponent>
+        <ButtonComponent handleClick={handleSubmit}>
+          {loading ? (
+            <CircularProgress color="inherit" size={35} />
+          ) : (
+            <p>Login</p>
+          )}
+        </ButtonComponent>
         <ButtonComponent handleClick={() => signIn("google")} color="info">
           <div className="flex gap-3 items-center  capitalize">
             <Image
