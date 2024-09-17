@@ -1,4 +1,8 @@
-import { courseIdEndpoints, coursesEndpoints } from "@/endpoints";
+import {
+  courseByCategoryEndpoints,
+  courseIdEndpoints,
+  coursesEndpoints,
+} from "@/endpoints";
 import { useQueryHook } from "@/hooks/useQuery";
 
 const useCourses = () => {
@@ -8,4 +12,11 @@ const useCourses = () => {
 const useCourseId = (id: string) => {
   return useQueryHook(["courseId", id], courseIdEndpoints(id));
 };
-export { useCourses, useCourseId };
+
+const useCategoryCoures = (category: string) => {
+  return useQueryHook(
+    ["categoryCourses", category],
+    courseByCategoryEndpoints(category)
+  );
+};
+export { useCourses, useCourseId, useCategoryCoures };

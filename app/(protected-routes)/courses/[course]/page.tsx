@@ -2,10 +2,7 @@
 import { useCourseId } from "@/api-services";
 import AccordionComponent from "@/components/accordian";
 import BreadCrumbsComponent from "@/components/breadcrumbs";
-import { axiosInstance } from "@/config/axiosInstance";
 import { Rating } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import Link from "next/link";
 import React from "react";
 
@@ -14,6 +11,7 @@ const relatedTags = [
   { id: 2, name: "Backend Development" },
   { id: 3, name: "Nest Js" },
 ];
+
 function CoursePage({ params }: { params: any }) {
   const course = params.course;
 
