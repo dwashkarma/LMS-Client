@@ -21,7 +21,7 @@ const TabComponent = ({ data, handleChange, value }: Props) => {
       <Tabs value={value} onChange={handleChange} textColor="primary">
         {Array.isArray(data) &&
           data?.map((items: string, index: number) => {
-            return <Tab label={items} {...a11yProps(index)} />;
+            return <Tab key={index} label={items} {...a11yProps(index)} />;
           })}
       </Tabs>
     </div>

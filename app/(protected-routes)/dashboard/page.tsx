@@ -29,8 +29,18 @@ export default function Home() {
 
   const { data: session } = useSession();
 
-  const { data, error, isLoading } =
-    category === "all" ? useCourses() : useCategoryCoures(category);
+  const {
+    data: allCoursesData,
+    error: allCoursesError,
+    isLoading: allCoursesLoading,
+  } = useCourses();
+  const {
+    data: categoryCoursesData,
+    error: categoryCoursesError,
+    isLoading: categoryCoursesLoading,
+  } = useCategoryCoures(category);
+  // Select data based on the category
+  const data = category === "all" ? allCoursesData : categoryCoursesData;
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
