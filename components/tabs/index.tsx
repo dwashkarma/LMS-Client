@@ -2,11 +2,13 @@
 import { Tab, Tabs } from "@mui/material";
 import React, { useState } from "react";
 
-type Props = {};
+type Props = {
+  data: string[];
+  value: number;
+  handleChange: (event: React.SyntheticEvent, newValue: number) => void;
+};
 
-const TabComponent = (props: Props) => {
-  const [value, setValue] = useState(0);
-
+const TabComponent = ({ data, handleChange, value }: Props) => {
   function a11yProps(index: number) {
     return {
       id: `simple-tab-${index}`,
@@ -14,19 +16,13 @@ const TabComponent = (props: Props) => {
     };
   }
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
   return (
     <div>
       <Tabs value={value} onChange={handleChange} textColor="primary">
-        <Tab label="NextJS" {...a11yProps(0)} />
-        <Tab label="JavaScript" {...a11yProps(1)} />
-        <Tab label="DOTNET ASP" {...a11yProps(2)} />
-        <Tab label="Flutter" {...a11yProps(3)} />
-        <Tab label="DevOps" {...a11yProps(4)} />
-        <Tab label="UI/UX" {...a11yProps(5)} />
+        {Array.isArray(data) &&
+          data?.map((items: string, index: number) => {
+            return <Tab key={index} label={items} {...a11yProps(index)} />;
+          })}
       </Tabs>
     </div>
   );

@@ -1,4 +1,5 @@
 "use client";
+import { useCategoryCoures, useCourses } from "@/api-services";
 import CardComponent from "@/components/shared/CardComponent";
 import CarouselCard from "@/components/shared/CarouselCard";
 import SkeletonComponent from "@/components/shared/SkeletonComponent";
@@ -9,16 +10,46 @@ import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
+const tabValues = [
+  "All",
+  "NextJs",
+  "ReactJs",
+  "Python",
+  "Web",
+  // "DOTNET ASP",
+  // "DevOps",
+  // "UI/UX",
+];
 
 export default function Home() {
+  const [category, setcategory] = useState<any>("all");
+  const [value, setValue] = useState(0);
+
   const { data: session } = useSession();
 
-  const { data, error } = useQuery({
-    queryKey: ["recentCourses"],
-    queryFn: async () => {
-      return await axiosInstance.get("/courses").then((res) => res.data);
-    },
-  });
+  const {
+    data: allCoursesData,
+    error: allCoursesError,
+    isLoading: allCoursesLoading,
+  } = useCourses();
+  const {
+    data: categoryCoursesData,
+    error: categoryCoursesError,
+    isLoading: categoryCoursesLoading,
+  } = useCategoryCoures(category);
+  // Select data based on the category
+  const data = category === "all" ? allCoursesData : categoryCoursesData;
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+    const tabElement = event.currentTarget as HTMLElement; // Cast to HTMLElement
+    const tabName = tabElement.textContent;
+    if (tabName) {
+      setcategory(tabName.toLowerCase());
+    }
+  };
 
   return (
     <div className="mx-5 lg:mx-28  flex flex-col  gap-6 my-6 ">
@@ -47,7 +78,7 @@ export default function Home() {
             Learn and practise with our talented instructors.
           </p>
           <p className="font-light text-base text-primary">By Dwash Karma</p>
-          <Rating value={3.5} precision={0.5} />
+          <Rating value={3.5} precision={0.5} readOnly />
           <div className="text-sm font-medium flex justify-between items-center">
             <div>
               Updated{" "}
@@ -70,7 +101,11 @@ export default function Home() {
 
       <Divider />
       <h2 className="text-2xl font-medium text-chart-1">Recommended for you</h2>
-      <TabComponent />
+      <TabComponent
+        data={tabValues}
+        handleChange={handleChange}
+        value={value}
+      />
       {data ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-6">
           {data?.map((item: any, index: number) => {

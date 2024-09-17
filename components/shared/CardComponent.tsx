@@ -30,7 +30,7 @@ const CardComponent: React.FC<CardProps> = ({ imageurl, data }) => {
         <div className="flex flex-col  gap-2 place-content-between  ">
           <div className="grid gap-2">
             {/* <div className="text-sm">{item?.description}</div> */}
-            <Rating value={data?.rating} precision={0.5} />
+            <Rating value={data?.rating} precision={0.5} readOnly />
             <div className="text-xs">{data?.author}</div>
           </div>
 
