@@ -22,7 +22,7 @@ function CoursePage({ params }: { params: any }) {
       <div className="  flex flex-col  gap-6 ">
         <div className="bg-background  text-dark">
           <div className="mx-5 lg:mx-28 my-6 gap-6 flex flex-col">
-            <BreadCrumbsComponent data={data.title} />
+            <BreadCrumbsComponent data={data?.title} />
             <h1 className="font-semibold text-3xl ">{data?.title}</h1>
             <p className="text-wrap">{data?.description}</p>
             <div className="flex gap-2 text-rating font-semibold">
@@ -49,8 +49,8 @@ function CoursePage({ params }: { params: any }) {
           <div className="flex gap-4">
             {relatedTags.map((item) => {
               return (
-                <div key={item.id}>
-                  <Link href={`/courses/${item.name}`} passHref={true}>
+                <div key={item?.id}>
+                  <Link href={`/courses/${item?.name}`} passHref={true}>
                     <div className="border-2 bg-card rounded-full p-3 px-4 hover:shadow hover:bg-slate-200">
                       {" "}
                       {item.name}

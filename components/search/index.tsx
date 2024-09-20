@@ -1,25 +1,29 @@
+"use client";
+
 import React, { useState } from "react";
-import {
-  InputBase,
-  IconButton,
-  Paper,
-  MenuItem,
-  MenuList,
-} from "@mui/material";
+import { MenuItem, Popover } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { data } from "../jsonData/Data"; // Assuming your data is coming from here
 import InputField from "../shared/InputField";
+import AutoCompleteComponent from "../shared/AutoCompleteComponent";
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
+  const [open, setopen] = useState(false);
 
   const handleInputChange = (e: any) => {
     setSearch(e.target.value);
+    setopen(true);
   };
 
-  const handleSearch = () => {
-    console.log("Searching for:", search);
-  };
+  // const handleChange = (event: any, newValue: string | null) => {
+  //   console.log(newValue);
+  //   console.log(event.target);
+  //   setSearch(event.target.value);
+  // };
+
+  const handleSearch = () => {};
+  console.log("Searching for:", search);
   const filteredData = data.filter((item) =>
     search.toLowerCase() === ""
       ? false
@@ -28,31 +32,30 @@ const SearchBar = () => {
 
   return (
     <>
-      <div className="relative ">
+      <div className="relative hidden md:block ">
         <InputField
           type="text"
           placeholder="Search for anything..."
           value={search}
+          width="30rem"
           handleChange={handleInputChange}
           onKeyDown={() => handleSearch()}
           name="search"
+          variant="standard"
           showAndornment={<SearchIcon />}
         />
         {/* Dropdown to show filtered results */}
 
-        <div
-          style={{
-            position: "absolute",
-            top: "100%",
-            width: "100%",
-            backgroundColor: "white",
-            borderRadius: "4px",
-          }}
-        >
+        {/* <Popover open={open}>
           {filteredData.map((item) => (
             <MenuItem key={item.id}>{item.first_name}</MenuItem>
           ))}
-        </div>
+        </Popover> */}
+        {/* <AutoCompleteComponent
+          value={search}
+          options={filteredData}
+          handleChange={handleChange}
+        /> */}
       </div>
     </>
   );

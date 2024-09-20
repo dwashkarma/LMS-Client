@@ -16,6 +16,8 @@ interface InputTypes {
   placeholder?: string;
   onKeyDown?: any;
   showAndornment?: any;
+  variant?: "standard" | "filled" | "outlined";
+  width?: string;
 }
 const InputField: React.FC<InputTypes> = ({
   name,
@@ -29,16 +31,21 @@ const InputField: React.FC<InputTypes> = ({
   placeholder,
   onKeyDown,
   showAndornment,
+  variant = "outlined",
+  width = "100%",
 }) => {
   return (
     <TextField
       placeholder={placeholder}
-      fullWidth
+      // fullWidth
+      sx={{
+        width: width,
+      }}
       name={name}
       value={value}
       label={label}
       type={type}
-      variant="outlined"
+      variant={variant}
       onBlur={handleBlur}
       onChange={handleChange}
       helperText={helperText}
