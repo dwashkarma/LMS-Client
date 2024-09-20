@@ -1,4 +1,5 @@
 import axios, { AxiosRequestHeaders } from "axios";
+import { error } from "console";
 import { getSession } from "next-auth/react";
 
 const baseURL = process.env.NEXT_PUBLIC_BASEURL;
@@ -40,4 +41,17 @@ axiosInstance.interceptors.request.use(
   }
 );
 
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    if (error.response && error.response?.status === 400) {
+      if (typeof window !== undefined) {
+        window.location.href = "/dashboard";
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 export { axiosInstance };

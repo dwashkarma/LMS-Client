@@ -1,12 +1,22 @@
-import { getServerSession } from "next-auth";
-
+"use client";
+import { useState } from "react";
+import { Button, Modal } from "tron-ui";
+import "tron-ui/dist/styles.css";
 const Page = () => {
-  const getSession = async () => {
-    const session = await getServerSession();
-    console.log(session);
-  };
+  const [open, setopen] = useState(false);
 
-  getSession();
-  return <div className="p-6"> course</div>;
+  const toggleModal = () => {
+    setopen((prev) => !prev);
+  };
+  return (
+    <div className="p-6">
+      <Button onClick={toggleModal} color="error">
+        hello
+      </Button>
+      <Modal onClose={toggleModal} open={open}>
+        <div>hello</div>
+      </Modal>
+    </div>
+  );
 };
 export default Page;
