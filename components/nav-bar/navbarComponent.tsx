@@ -56,7 +56,10 @@ const NavBarComponent: React.FC<NavbarProps> = ({
               <MenuIcon />
             </IconButton>
           </div>
-          <div className="font-semibold flex items-center gap-4 text-primary text-2xl">
+          <button
+            onClick={() => router.push("/")}
+            className="font-semibold flex items-center gap-4 text-primary text-2xl"
+          >
             <Image
               className="block"
               src="/logo.svg"
@@ -65,7 +68,7 @@ const NavBarComponent: React.FC<NavbarProps> = ({
               width={30}
             />
             <span className="text-base">Learn Online</span>
-          </div>
+          </button>
         </div>
 
         {/* Logo and Title */}
@@ -94,7 +97,7 @@ const NavBarComponent: React.FC<NavbarProps> = ({
                 vertical: "top",
                 horizontal: "left",
               }}
-              sx={{ maxWidth: 350, marginTop: 3}}
+              sx={{ maxWidth: 350, marginTop: 3 }}
             >
               <ul className=" p-3 w-60">
                 {options.map((option: any) => (
