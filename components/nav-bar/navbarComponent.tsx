@@ -1,23 +1,21 @@
 "use client";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import React, { MouseEvent, useContext, useState } from "react";
+import React from "react";
 import { signOut } from "next-auth/react";
 import {
   Avatar,
   Menu,
   MenuItem,
-  Drawer,
   List,
-  ListItem,
   IconButton,
-  Button,
   Popover,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import SearchComponent from "../search";
-
+import { useRouter } from "next/navigation";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 interface NavbarProps {
   handleDrawerToggle: () => void;
   categoriesOpen: any;
@@ -41,21 +39,23 @@ const NavBarComponent: React.FC<NavbarProps> = ({
   handleProfileMenuClose,
 }) => {
   const { data: session } = useSession();
-
+  const router = useRouter();
   return (
     <>
       {/* Main Navbar */}
-      <div className="flex justify-between items-center p-4 text-md text-slate-600 shadow-lg sticky  md:top-0 z-[900] bg-card">
+      <div className="flex justify-between items-center p-3 md:px-8   text-md text-slate-600 shadow-lg  z-[900] bg-card">
         {/* Menu Icon for Mobile */}
         <div className="flex gap-2 items-center">
-          <IconButton
-            className="block "
-            color="inherit"
-            aria-label="menu"
-            onClick={handleDrawerToggle}
-          >
-            <MenuIcon />
-          </IconButton>
+          <div className=" md:hidden">
+            <IconButton
+              className="block "
+              color="inherit"
+              aria-label="menu"
+              onClick={handleDrawerToggle}
+            >
+              <MenuIcon />
+            </IconButton>
+          </div>
           <div className="font-semibold flex items-center gap-4 text-primary text-2xl">
             <Image
               className="block"
@@ -72,18 +72,15 @@ const NavBarComponent: React.FC<NavbarProps> = ({
         <div className="flex items-center gap-16">
           {/* Categories Button with Popover */}
           <div className="text-dark hidden md:block">
-            <Button
+            <button
+              className="flex gap-2"
               aria-label="categories"
               id="categories-button"
-              aria-controls={categoriesOpen ? "categories-popover" : undefined}
-              aria-expanded={categoriesOpen ? "true" : undefined}
-              aria-haspopup="true"
-              onMouseEnter={handleCategoriesMouseEnter}
-              color="inherit"
+              onClick={handleCategoriesMouseEnter}
             >
               <p className="text-base font-normal capitalize">Categories</p>
               <ArrowDropDownIcon />
-            </Button>
+            </button>
             <Popover
               id="categories-popover"
               anchorEl={categoriesAnchorEl}
@@ -97,24 +94,33 @@ const NavBarComponent: React.FC<NavbarProps> = ({
                 vertical: "top",
                 horizontal: "left",
               }}
-              sx={{ maxWidth: 200 }}
+              sx={{ maxWidth: 350, marginTop: 3}}
             >
-              <List>
+              <ul className=" p-3 w-60">
                 {options.map((option: any) => (
-                  <MenuItem key={option} onClick={handleCategoriesMenuClose}>
-                    {option}
-                  </MenuItem>
+                  <li key={option} onClick={handleCategoriesMenuClose}>
+                    <div className="flex justify-between p-2 text-base">
+                      {option}
+                      <KeyboardArrowRightIcon fontSize="small" />
+                    </div>
+                  </li>
                 ))}
-              </List>
+              </ul>
             </Popover>
           </div>
         </div>
 
         {/* Search Bar */}
-        <div className="hidden lg:block">
-          <SearchComponent />
-        </div>
-        <div>Explore</div>
+
+        <SearchComponent />
+
+        <button
+          className="hover:font-medium p-2 px-3 hidden md:block "
+          onClick={() => router.push("/admin/dashboard")}
+        >
+          Teach on LMS
+        </button>
+
         {/* Profile Button */}
         <button
           className="flex gap-2 items-center text-sm font-normal"
@@ -148,12 +154,14 @@ const NavBarComponent: React.FC<NavbarProps> = ({
             vertical: "top",
             horizontal: "left",
           }}
+          sx={{ marginTop: 2 }}
         >
           <MenuItem
             onClick={() => {
               signOut();
               handleProfileMenuClose();
             }}
+            sx={{ width: 100 }}
           >
             Logout
           </MenuItem>

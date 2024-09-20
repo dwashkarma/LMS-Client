@@ -5,20 +5,12 @@ import { useState, MouseEvent } from "react";
 
 // Options for the categories dropdown
 const options = [
-  "None",
-  "IELS",
-  "FrontEnd",
-  "BackEnd",
-  "Software",
-  "Hangouts Call",
-  "Luna",
-  "Oberon",
-  "Phobos",
-  "Pyxis",
-  "Sedna",
-  "Titania",
-  "Triton",
-  "Umbriel",
+  "NextJs",
+  "ReactJs",
+  "Python",
+  "Web Development",
+  "NestJs",
+  "Figma (UI/UX)",
 ];
 
 type Props = {};
