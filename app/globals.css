@@ -5,6 +5,9 @@
 body {
   @apply text-dark;
 }
+.timeFrame {
+  @apply hidden md:block;
+}
 
 @layer base {
   :root {

@@ -7,9 +7,9 @@ import Link from "next/link";
 import React from "react";
 
 const relatedTags = [
-  { id: 1, name: "AI and Machine Learning" },
-  { id: 2, name: "Backend Development" },
-  { id: 3, name: "Nest Js" },
+  { id: 1, name: "AI and Machine Learning", path: "#" },
+  { id: 2, name: "Backend Development", path: "#" },
+  { id: 3, name: "Nest Js", path: "#" },
 ];
 
 function CoursePage({ params }: { params: any }) {
@@ -20,7 +20,7 @@ function CoursePage({ params }: { params: any }) {
   return (
     !isLoading && (
       <div className="  flex flex-col  gap-6 ">
-        <div className="bg-background  text-dark">
+        <div className="">
           <div className="mx-5 lg:mx-28 my-6 gap-6 flex flex-col">
             <BreadCrumbsComponent data={data?.title} />
             <h1 className="font-semibold text-3xl ">{data?.title}</h1>
@@ -50,9 +50,8 @@ function CoursePage({ params }: { params: any }) {
             {relatedTags.map((item) => {
               return (
                 <div key={item?.id}>
-                  <Link href={`/courses/${item?.name}`} passHref={true}>
-                    <div className="border-2 bg-card rounded-full p-3 px-4 hover:shadow hover:bg-slate-200">
-                      {" "}
+                  <Link href={`/courses/${item?.path}`} passHref={true}>
+                    <div className="border-2 bg-card text-center min-w-20 h-auto  text-xs md:text-sm  rounded-full p-3 md:px-4 hover:shadow hover:bg-slate-200">
                       {item.name}
                     </div>
                   </Link>
@@ -68,7 +67,7 @@ function CoursePage({ params }: { params: any }) {
               5 sections .20 lessons .5 hours
             </p>
             <div className="flex">
-              <div className="basis-2/3">
+              <div className="md:basis-2/3">
                 <AccordionComponent />
               </div>
             </div>

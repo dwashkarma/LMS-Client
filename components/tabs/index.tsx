@@ -18,7 +18,14 @@ const TabComponent = ({ data, handleChange, value }: Props) => {
 
   return (
     <div>
-      <Tabs value={value} onChange={handleChange} textColor="primary">
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        textColor="primary"
+        variant="scrollable"
+        scrollButtons="auto"
+        allowScrollButtonsMobile
+      >
         {Array.isArray(data) &&
           data?.map((items: string, index: number) => {
             return <Tab key={index} label={items} {...a11yProps(index)} />;
