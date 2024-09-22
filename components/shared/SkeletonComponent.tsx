@@ -7,13 +7,13 @@ function SkeletonComponent() {
         animation="wave"
         variant="rectangular"
         height={200}
-        width={300}
+        sx={{ width: { xs: "100%", md: 300 } }} // Adjusting width for responsiveness
       />
       <Skeleton
         animation="wave"
         variant="rectangular"
         height={50}
-        width={300}
+        sx={{ width: { xs: "100%", md: 300 } }} // Adjusting width for responsiveness
       />
     </div>
   );

@@ -88,12 +88,12 @@ export default function Home() {
           </div>
           <div className="text-end"></div>
           <div className="text-lg  flex gap-4">
-            <span className="font-semibold">$ 12.99</span>
+            <span className="font-semibold text-primary">NRS 8999</span>
             <span
               className=" font-light text-slate-500"
               style={{ textDecoration: "line-through" }}
             >
-              $ 18.99
+              NRS 14999
             </span>
           </div>
         </div>

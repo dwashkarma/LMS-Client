@@ -23,7 +23,7 @@ const CardComponent: React.FC<CardProps> = ({ imageurl, data }) => {
       )}
       <CardHeader>
         <CardTitle className="md:text-base text-sm lg:text-normal">
-          {data?.title}
+          {data?.title.slice(0, 50) + "..."}
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -36,7 +36,7 @@ const CardComponent: React.FC<CardProps> = ({ imageurl, data }) => {
 
           <div className="flex justify-between items-center gap-2">
             <div className="">
-              <span> $ {data?.purchase?.amount}</span>
+              <span> NRS {data?.purchase?.amount}</span>
               {/* <span
                         className="text-slate-400"
                         style={{ textDecoration: "line-through" }}
